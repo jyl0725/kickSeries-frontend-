@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import '../App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import CompletedProjectsContainer from './CompletedProjectsContainer'
+import UnCompletedProjectsContainer from './UnCompletedProjectsContainer'
+import UserProjectsContainer from './UserCompletedProjectsContainer'
 
-// <Router>
-//   <React.Fragment>
-//     <NavBar/>
-//     <Route exact path="/" render={Home}/>
-//     <Route exact path="/recipes" component={RecipeContainer}/>
-//     <Route exact path="/cookbook" component={UserRecipeContainer}/>
-//     <Route exact path="/cookbook/create" component={CreateRecipe}/>
-//   </React.Fragment>
-// </Router>
 
 class App extends Component {
 
@@ -39,6 +32,15 @@ class App extends Component {
     return (
       <div className="app">
         // {this.renderNoneArtistProject()}
+        <Router>
+          <React.Fragment>
+            <NavBar/>
+            <Route exact path="/" render={Home}/>
+            <Route exact path="/completedrojects" component={CompletedProjectsContainer}/>
+            <Route exact path="/userprojects" component={UserProjectsContainer}/>
+            <Route exact path="/uncompletedprojects" component={UncompletedProjectsContainer}/>
+          </React.Fragment>
+        </Router>
 
       </div>
     );
