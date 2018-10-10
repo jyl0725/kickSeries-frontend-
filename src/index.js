@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './container/App';
 import * as serviceWorker from './serviceWorker';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import Reducer from './reducers/rootReducer'
+import Reducer from './reducers/rootReducer';
+import Thunk from 'react-thunk';
 
 const store = createStore(Reducer)
 
