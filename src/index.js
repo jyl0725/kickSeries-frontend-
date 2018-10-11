@@ -5,7 +5,7 @@ import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import Reducer from './reducers/rootReducer';
+import Reducer from './reducers';
 import Thunk from 'react-thunk';
 
 const store = createStore(Reducer)
