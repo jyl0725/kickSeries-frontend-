@@ -6,7 +6,7 @@ const projectUserAdapter = {
   postProjectUser: (userId, projectId) =>{
     return fetch(this.api, {
       method: "POST",
-      body: Json.stringify({ user_id: userId, project_id: ProjectId })
+      body: JSON.stringify({ user_id: userId, project_id: ProjectId })
     });
     .then(res => res.json())
   },
