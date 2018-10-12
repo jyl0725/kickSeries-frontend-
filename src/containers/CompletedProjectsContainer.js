@@ -11,7 +11,6 @@ class CompletedProjectsContainer extends React.Component{
       .map(pro => <DisplayCompletedProjects key={pro.id} {...pro} />)
   }
   render(){
-    console.log(this.props.projects)
     return(
       <div>
         {this.renderCompletedProject()}
