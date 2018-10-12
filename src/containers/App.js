@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import '../App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import CompletedProjectsContainer from './CompletedProjectsContainer'
-import UncompletedProjectsContainer from './UncompletedProjectsContainer'
-import UserProjectsContainer from './UserProjectsContainer'
-import Home from '../components/Home'
-import NavBar from '../components/NavBar'
-import Login from './LoginForm'
+import CompletedProjectsContainer from './CompletedProjectsContainer';
+import UncompletedProjectsContainer from './UncompletedProjectsContainer';
+import UserProjectsContainer from './UserProjectsContainer';
+import Home from '../components/Home';
+import NavBar from '../components/NavBar';
+import Login from './LoginForm';
+import {connect} from 'react-redux';
+import {SHOW_PROJECTS} from '../reducers/types';
 
 
 class App extends Component {
@@ -15,14 +17,12 @@ class App extends Component {
   //   projects: []
   // }
   //
-  // componentDidMount(){
-  //   fetch('http://localhost:4000/projects')
-  //   .then(res => res.json())
-  //   .then(projectsData => this.setState({
-  //     projects: projectsData
-  //   }))
-  // }
-  //
+  componentDidMount(){
+    fetch('http://localhost:4000/projects')
+    .then(res => res.json())
+    .then(projectsData => this.props.showProject(projectsData))
+  }
+
   // renderNoneArtistProject = () =>{
   //
   //   return this.state.projects.filter(p => {
@@ -50,4 +50,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchtoProps =(dispatch) =>{
+  return{
+   showProject: (projectsData) => {dispatch({type:SHOW_PROJECTS, payload: projectsData })}
+ }
+}
+
+export default connect(null, mapDispatchtoProps)(App);

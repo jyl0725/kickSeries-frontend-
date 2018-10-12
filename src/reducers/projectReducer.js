@@ -8,3 +8,14 @@ const initialState = {
     image_url: '',
   }
 }
+
+  const projectReducer = (state = initialState, action) =>{
+    switch(action.type){
+      case SHOW_PROJECTS:
+        return {...state, projects: action.payload};
+      default:
+        return state
+    }
+  }
+
+  export default projectReducer

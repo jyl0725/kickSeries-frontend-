@@ -1,7 +1,7 @@
 .app {
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
-grid-template-rows: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
 }
 
 .Home {
@@ -12,4 +12,8 @@ grid-template-rows: 20% 20% 20% 20% 20%;
 .navbartitle {
   grid-column-start: 2;
   grid-row-start: 1;
+}
+
+.snkr-card-container {
+  border: 3px solid black;
 }
