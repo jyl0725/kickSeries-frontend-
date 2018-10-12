@@ -1,1 +1,3 @@
-export const Create_User = "Create_User";
+export const CREATE_USER = "CREATE_USER";
+export const ONCHANGE_USERFORM = "ONCHANGE_USERFORM"
+export const REMOVE_PASSWORD ="REMOVE_PASSWORD"

@@ -5,5 +5,5 @@ import projectReducer from './projectReducer'
 
 export default combineReducers({
   user: userReducer,
-  project: projectReducer,
+  // project: projectReducer,
 })

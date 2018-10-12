@@ -1,18 +1,17 @@
-const userAdapter = {
-  api : 'http://localhost:4000/users/',
-  allUsers:
-    return fetch(this.api)
-    .then(res => res.json()),
-  postUser: (name, userName, password, role) =>{
-    return fetch(this.api, {
-      method: "POST",
-      body: Json.stringify({ name: name, userName: userName, password: password, role: role })
+userAdapter = {
+  api: 'http://localhost:4000/users/',
+  allUsers: fetch(this.api).then(res => res.json()),
+  postUser: ({form}) =>{
+    fetch(this.api, {
+    method: "POST",
+    headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: form.name, userName: form.userName, password: form.password, role: form.user })
     });
-    .then(res => res.json())
   },
   deleteUser: (id) => {
-     return fetch(this.api`${id}`, { method: "DELETE" })
+      fetch(this.api`${id}`, { method: "DELETE" })
   },
 }
-
-export default userAdapter

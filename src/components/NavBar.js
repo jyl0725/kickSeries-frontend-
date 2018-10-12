@@ -1,7 +1,9 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const NavBar = () =>{
+const NavBar = (props) =>{
+  console.log(props)
   return (
     <div id="navbarholder">
       <NavLink to="/" id='borderIcon'>
@@ -16,4 +18,11 @@ const NavBar = () =>{
   );
 }
 
-export default NavBar
+const mapStatetoProps = (state) =>{
+  return {
+      user: state.user.form.username
+  }
+
+}
+
+export default connect(mapStatetoProps)(NavBar)
