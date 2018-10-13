@@ -2,7 +2,7 @@ import React from 'react'
 import {Tools} from 'react-sketch';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom'
-import {SET_NEW_PROJECT, SHOW_PROJECTS} from '../reducers/types'
+import {SET_NEW_PROJECT, SHOW_PROJECTS, ADD_PROJECT_TO_PROJECTS} from '../reducers/types'
 
 class StoryTellerProjectForm extends React.Component{
 
@@ -37,10 +37,8 @@ class StoryTellerProjectForm extends React.Component{
       const newProject = project.find(project => project.title === this.state.title);
       this.props.showProject(project)
       this.props.setNewProject(newProject)
-      console.log(newProject)
-      console.log(this.props.project)
     })
-    .then(data =>{
+    .then(() =>{
       fetch('http://localhost:4000/project_users',{
         method: "POST",
         headers:{
@@ -49,9 +47,18 @@ class StoryTellerProjectForm extends React.Component{
         },
         body: JSON.stringify({user_id:this.props.currentUser.id, project_id: this.props.project.id})
       })
+      .then(res => res.json())
+      .then(pu => {
+        console.log(pu)
+        let projects = this.props.projects
+        let pro = this.props.projects.find(proj => proj.id === pu.project_id)
+        pro.users.push(pu.user)
+        this.props.setNewProject(pro)
+        this.props.addProjectToProjects(projects)
+      })
+    .then(() => this.setState({title: '', story: ''}))
     })
   }
-
 
   render(){
     return (
@@ -76,13 +83,15 @@ class StoryTellerProjectForm extends React.Component{
 const mapDispatchtoProps =(dispatch) =>{
   return {
     setNewProject: (newProject) => dispatch({type:SET_NEW_PROJECT, payload: newProject}),
-    showProject: (project) => dispatch({type: SHOW_PROJECTS ,payload: project})
+    showProject: (project) => dispatch({type: SHOW_PROJECTS ,payload: project}),
+    addProjectToProjects: (project) => dispatch({type: ADD_PROJECT_TO_PROJECTS, payload:project})
   }
 }
 const mapStatetoProps = (state) =>{
   return {
     currentUser: state.user.currentUser,
     project: state.project.project,
+    projects: state.project.projects,
   }
 }
 

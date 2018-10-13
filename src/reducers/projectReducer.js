@@ -1,4 +1,4 @@
-import {SHOW_PROJECTS, FIND_PROJECT, SET_NEW_PROJECT} from './types'
+import {SHOW_PROJECTS, FIND_PROJECT, SET_NEW_PROJECT, ADD_PROJECT_TO_PROJECTS} from './types'
 
 const initialState = {
   projects: [],
@@ -14,6 +14,8 @@ const initialState = {
         return {...state, project: action.payload}
       case SET_NEW_PROJECT:
         return {...state, project: action.payload}
+      case ADD_PROJECT_TO_PROJECTS:
+        return{...state, projects: action.payload}
       default:
         return state
     }
