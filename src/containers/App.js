@@ -7,7 +7,7 @@ import UserProjectsContainer from './UserProjectsContainer';
 import Home from '../components/Home';
 import NavBar from '../components/NavBar';
 import SingleCompletedProjectDisplay from '../components/singleCompletedProjectDisplay'
-import Login from './LoginForm';
+import SignUp from './SignUpForm';
 import {connect} from 'react-redux';
 import {SHOW_PROJECTS} from '../reducers/types';
 
@@ -43,7 +43,7 @@ class App extends Component {
             <Route exact path="/completedprojects" component={CompletedProjectsContainer}/>
             <Route exact path="/userprojects" component={UserProjectsContainer}/>
             <Route exact path="/uncompletedprojects" component={UncompletedProjectsContainer}/>
-            <Route exact path="/login" component={Login}/>
+            <Route exact path="/SignUp" component={SignUp}/>
             <Route exact path="/singleCompletedProjectDisplay" component={SingleCompletedProjectDisplay}/>
           </React.Fragment>
         </Router>

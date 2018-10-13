@@ -1,26 +1,15 @@
-import {CREATE_USER,ONCHANGE_USERFORM, REMOVE_PASSWORD} from './types'
+import {SET_NEW_USER ,  SET_CURRENT_USER} from './types'
 
 const initialState = {
-  form:{
-    name: '',
-    username:'',
-    password: '',
-    user: '',
-  }
+  currentUser: null
 }
 
 const userReducer = (state = initialState, action) =>{
   switch(action.type){
-    // case CREATE_USER:
-    //   //action.payload : is your user data
-    //   return {
-    //     ...state,
-    //     user: action.payload};
-    case ONCHANGE_USERFORM:
-      const {inputName, value} = action.payload
-      return {...state, form:{...state.form, [inputName]:value}}
-    case REMOVE_PASSWORD:
-      return{...state, form:{...state.form, password:''}}
+    case SET_NEW_USER:
+      return{...state,  currentUser:action.payload}
+    case SET_CURRENT_USER:
+      return {...state, currentUser:action.payload}
     default:
       return state;
   }

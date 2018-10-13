@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const NavBar = (props) =>{
-  console.log(props)
+console.log(props)
+
   return (
     <div id="navbarholder">
       <NavLink to="/" id='borderIcon'>
@@ -13,16 +14,22 @@ const NavBar = (props) =>{
       <NavLink className='project' to="/completedprojects">All Completed Project</NavLink>
       <NavLink className='project' to="/userprojects">All Your Project</NavLink>
       <NavLink className='project' to="/uncompletedprojects">Work on a Project</NavLink>
-      <NavLink className='project' to="/login">Login</NavLink>
+      {
+         props.currentUser ? <div key={props.currentUser.id}> Hi {props.currentUser.username} </div> :
+        <div>
+          <NavLink className='project' to="/login">Login</NavLink>
+          <NavLink className='project' to="/signUp">Sign Up</NavLink>
+        </div>
+      }
     </div>
   );
 }
 
+
 const mapStatetoProps = (state) =>{
   return {
-      user: state.user.form.username
+    currentUser: state.user.currentUser,
   }
-
 }
 
 export default connect(mapStatetoProps)(NavBar)
