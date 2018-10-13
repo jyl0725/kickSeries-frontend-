@@ -3,11 +3,12 @@ import '../App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import CompletedProjectsContainer from './CompletedProjectsContainer';
 import UncompletedProjectsContainer from './UncompletedProjectsContainer';
-import UserProjectsContainer from './UserProjectsContainer';
+import NewPojectForm from './NewPojectForm';
+import UserProjectDisplay from './UserProjectDisplay'
 import Home from '../components/Home';
 import NavBar from '../components/NavBar';
 import SingleCompletedProjectDisplay from '../components/singleCompletedProjectDisplay'
-import SignUp from './SignUpForm';
+import SignUpForm from './SignUpForm';
 import {connect} from 'react-redux';
 import {SHOW_PROJECTS} from '../reducers/types';
 
@@ -15,10 +16,7 @@ import {SHOW_PROJECTS} from '../reducers/types';
 
 class App extends Component {
 
-  // state = {
-  //   projects: []
-  // }
-  //
+
   componentDidMount(){
     fetch('http://localhost:4000/projects')
     .then(res => res.json())
@@ -41,10 +39,11 @@ class App extends Component {
             <NavBar/>
             <Route exact path="/" render={Home}/>
             <Route exact path="/completedprojects" component={CompletedProjectsContainer}/>
-            <Route exact path="/userprojects" component={UserProjectsContainer}/>
             <Route exact path="/uncompletedprojects" component={UncompletedProjectsContainer}/>
-            <Route exact path="/SignUp" component={SignUp}/>
+            <Route exact path="/SignUp" component={SignUpForm}/>
             <Route exact path="/singleCompletedProjectDisplay" component={SingleCompletedProjectDisplay}/>
+            <Route exact path="/newprojectform" component={NewPojectForm}/>
+            <Route exact path="/userprojectdisplay" componenet={UserProjectDisplay} />
           </React.Fragment>
         </Router>
 

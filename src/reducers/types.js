@@ -2,3 +2,4 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const SET_NEW_USER = 'SET_NEW_USER'
 export const SHOW_PROJECTS = "SHOW_PROJECTS"
 export const FIND_PROJECT = 'FIND_PROJECT'
+export const SET_NEW_PROJECT = 'SET_NEW_PROJECT'

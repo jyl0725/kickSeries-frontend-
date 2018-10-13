@@ -1,12 +1,8 @@
-import {SHOW_PROJECTS, FIND_PROJECT} from './types'
+import {SHOW_PROJECTS, FIND_PROJECT, SET_NEW_PROJECT} from './types'
 
 const initialState = {
   projects: [],
-  project: {
-    title: '',
-    story: '',
-    image_url: '',
-  },
+  project: null,
   projectName: ''
 }
 
@@ -15,6 +11,8 @@ const initialState = {
       case SHOW_PROJECTS:
         return {...state, projects: action.payload};
       case FIND_PROJECT:
+        return {...state, project: action.payload}
+      case SET_NEW_PROJECT:
         return {...state, project: action.payload}
       default:
         return state

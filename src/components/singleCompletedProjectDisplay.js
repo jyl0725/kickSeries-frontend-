@@ -12,7 +12,7 @@ const SingleCompletedProjectDisplay = (props) =>{
   return(
     <div>
       {props.project.title}
-      <img src={props.project.image_url} width="200" height="200" alt='sneaker-image' />
+      <img src={props.project.image_url} width="200" height="200" alt='sneaker' />
       {props.project.story}
       {renderProjectUsers()}
     </div>

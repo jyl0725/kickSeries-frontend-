@@ -12,11 +12,16 @@ console.log(props)
       </NavLink>
       <div id='navbartitle'>Kick Series</div>
       <NavLink className='project' to="/completedprojects">All Completed Project</NavLink>
-      <NavLink className='project' to="/userprojects">All Your Project</NavLink>
-      <NavLink className='project' to="/uncompletedprojects">Work on a Project</NavLink>
       {
-         props.currentUser ? <div key={props.currentUser.id}> Hi {props.currentUser.username} </div> :
+         props.currentUser ?
+         <div key={props.currentUser.id}> Hi {props.currentUser.username}
+           <div>
+             <NavLink className='project' to="/userprojects">All Your Project</NavLink>
+             <NavLink className='project' to="/uncompletedprojects">Work on a Project</NavLink>
+           </div>
+         </div> :
         <div>
+
           <NavLink className='project' to="/login">Login</NavLink>
           <NavLink className='project' to="/signUp">Sign Up</NavLink>
         </div>

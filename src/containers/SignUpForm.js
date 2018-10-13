@@ -1,8 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {SET_CURRENT_USER} from '../reducers/types'
+import {Redirect} from 'react-router-dom'
 // import userAdapter from '../adapters/userAdapter'
-class SignUp extends React.Component{
+class SignUpForm extends React.Component{
   state = {
     name:'',
     username: '',
@@ -30,6 +31,7 @@ class SignUp extends React.Component{
   })
   .then(res => this.fetchCurrentUser())
 
+
   }
 
   fetchCurrentUser = () =>{
@@ -40,12 +42,19 @@ class SignUp extends React.Component{
       this.props.setCurrentUser(currentUser)
       console.log(currentUser)
     })
-    .then(this.setState({ name: '', password: '', role:'' }))
+    .then(this.setState({ name: '', password: '', role:'', redirect: true}))
+  }
+
+  renderUserStartPage = () =>{
+    if(this.state.redirect){
+      return <Redirect to ='/newprojectform' />
+    }
   }
 
   render(){
     return (
       <form onSubmit={this.createAndSetCurrentUser}>
+        {this.renderUserStartPage()}
         <label>
           Name:
           <input type="text" name="name" value={this.state.name} onChange={this.handleChange}  />
@@ -81,4 +90,4 @@ const mapDispatchtoProps = (dispatch) =>{
     setCurrentUser: (currentUser) => dispatch({type: SET_CURRENT_USER, payload:currentUser})
   }
 }
-export default connect(null, mapDispatchtoProps)(SignUp)
+export default connect(null, mapDispatchtoProps)(SignUpForm)
