@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const NavBar = (props) =>{
-console.log(props)
 
   return (
     <div id="navbarholder">
@@ -16,7 +15,7 @@ console.log(props)
          props.currentUser ?
          <div key={props.currentUser.id}> Hi {props.currentUser.username}
            <div>
-             <NavLink className='project' to="/userprojects">All Your Project</NavLink>
+             <NavLink className='project' to="/userprojectdisplay">All Your Project</NavLink>
              <NavLink className='project' to="/uncompletedprojects">Work on a Project</NavLink>
            </div>
          </div> :

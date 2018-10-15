@@ -2,7 +2,7 @@ import React from 'react'
 import {Tools} from 'react-sketch';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom'
-import {SET_NEW_PROJECT, SHOW_PROJECTS, ADD_PROJECT_TO_PROJECTS} from '../reducers/types'
+import {SET_NEW_PROJECT, SHOW_PROJECTS, ADD_PROJECT_TO_PROJECTS, FIND_USER_PROJECTS} from '../reducers/types'
 
 class StoryTellerProjectForm extends React.Component{
 
@@ -84,7 +84,8 @@ const mapDispatchtoProps =(dispatch) =>{
   return {
     setNewProject: (newProject) => dispatch({type:SET_NEW_PROJECT, payload: newProject}),
     showProject: (project) => dispatch({type: SHOW_PROJECTS ,payload: project}),
-    addProjectToProjects: (project) => dispatch({type: ADD_PROJECT_TO_PROJECTS, payload:project})
+    addProjectToProjects: (project) => dispatch({type: ADD_PROJECT_TO_PROJECTS, payload:project}),
+    findUserProjects: (data) => dispatch({type:FIND_USER_PROJECTS, payload: data })
   }
 }
 const mapStatetoProps = (state) =>{

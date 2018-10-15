@@ -43,7 +43,7 @@ class App extends Component {
             <Route exact path="/SignUp" component={SignUpForm}/>
             <Route exact path="/singleCompletedProjectDisplay" component={SingleCompletedProjectDisplay}/>
             <Route exact path="/newprojectform" component={NewPojectForm}/>
-            <Route exact path="/userprojectdisplay" componenet={UserProjectDisplay} />
+            <Route exact path="/userprojectdisplay" component={UserProjectDisplay} />
           </React.Fragment>
         </Router>
 
