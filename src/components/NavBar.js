@@ -1,13 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { LOG_OUT } from '../reducers/types'
+
 
 const NavBar = (props) =>{
 
-  const handleClick = (event) =>{
-    props.LogOut()
-  }
   return (
     <div id="navbarholder">
       <NavLink to="/" id='borderIcon'>
@@ -41,10 +38,6 @@ const mapStatetoProps = (state) =>{
   }
 }
 
-const mapDispatchtoProps = (dispatch) =>{
-  return {
-    LogOut: () => dispatch({type: LOG_OUT})
-  }
-}
 
-export default connect(mapStatetoProps, mapDispatchtoProps)(NavBar)
+
+export default connect(mapStatetoProps)(NavBar)

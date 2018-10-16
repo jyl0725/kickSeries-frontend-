@@ -21,7 +21,7 @@ class Login extends React.Component{
         <label>UserName</label>
         <input name='username' type='text' value={this.state.username} onChange={this.onChange} />
         <label>Password</label>
-        <input name='"password")' type='"current-password")' value={this.state.password} onChange={this.onChange} />
+        <input name='"password")' type='"password")' value={this.state.password} onChange={this.onChange} />
         <input type="submit" value="submit" />
       </form>
     )

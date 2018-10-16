@@ -10,10 +10,10 @@ import NavBar from '../components/NavBar';
 import SingleCompletedProjectDisplay from '../components/singleCompletedProjectDisplay'
 import SignUpForm from './SignUpForm';
 import SingleArtistProject from './SingleArtistProject'
+import SingleDesignerProject from './SingleDesignerProject'
 import {connect} from 'react-redux';
 import Login from '../containers/Login'
 import LogOut from '../containers/Logout'
-import SingleDesignerProject from './SingleDesignerProject'
 import {SHOW_PROJECTS} from '../reducers/types';
 
 
@@ -26,14 +26,6 @@ class App extends Component {
     .then(res => res.json())
     .then(projectsData => this.props.showProject(projectsData))
   }
-
-  // renderNoneArtistProject = () =>{
-  //
-  //   return this.state.projects.filter(p => {
-  //     return p.users.find( u => u.role === 'artist')
-  //   }).map(pro => ( <div key={pro.id}>{pro.story}</div>))
-  // }
-
 
   render() {
     return (
