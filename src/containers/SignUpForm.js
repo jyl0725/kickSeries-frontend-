@@ -65,7 +65,7 @@ class SignUpForm extends React.Component{
         </label>
         <label>
           Password:
-          <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
+          <input type="current-password" name="password" value={this.state.password} onChange={this.handleChange}/>
         </label>
         <select name = 'role' onChange={this.handleChange}>
           <option value='select'>Select</option>

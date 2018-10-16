@@ -1,4 +1,4 @@
-import {SET_NEW_USER ,  SET_CURRENT_USER, FIND_USER_PROJECTS} from './types'
+import {SET_NEW_USER ,  SET_CURRENT_USER, FIND_USER_PROJECTS, LOG_OUT} from './types'
 
 const initialState = {
   currentUser: null
@@ -12,6 +12,8 @@ const userReducer = (state = initialState, action) =>{
       return {...state, currentUser:action.payload}
     case FIND_USER_PROJECTS:
       return {...state, currentUser:action.payload}
+    case LOG_OUT:
+      return {currentUser: ''}
 
     default:
       return state;

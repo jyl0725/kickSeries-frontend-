@@ -12,6 +12,7 @@ import SignUpForm from './SignUpForm';
 import SingleArtistProject from './SingleArtistProject'
 import {connect} from 'react-redux';
 import Login from '../containers/Login'
+import LogOut from '../containers/Logout'
 import SingleDesignerProject from './SingleDesignerProject'
 import {SHOW_PROJECTS} from '../reducers/types';
 
@@ -50,6 +51,7 @@ class App extends Component {
             <Route exact path="/singlearistproject" component={SingleArtistProject} />
             <Route exact path="/singledesignerproject" component={SingleDesignerProject} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/logout" component={LogOut} />
           </React.Fragment>
         </Router>
 

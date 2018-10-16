@@ -21,8 +21,8 @@ class SingleArtistProject extends React.Component{
 
   handleSave =(event) =>{
     const drawing = this._sketch.toDataURL()
-    const project = this.props.project.image_url = drawing
-    this.props.findProject(project)
+    // const project = this.props.project.image_url = drawing
+    // this.props.findProject(project)
     fetch(`http://localhost:4000/projects/${this.props.project.id}`,{
       headers: {
         'Accept': 'application/json',
@@ -80,10 +80,10 @@ const mapStatetoProps = state =>{
   }
 }
 
-const mapDispatchtoProps = dispatch =>{
-  return{
-    findProject: (proj) => dispatch({type: FIND_PROJECT, payload: proj})
-  }
-}
+// const mapDispatchtoProps = dispatch =>{
+//   return{
+//     findProject: (proj) => dispatch({type: FIND_PROJECT, payload: proj})
+//   }
+// }
 
-export default connect(mapStatetoProps,mapDispatchtoProps )(SingleArtistProject)
+export default connect(mapStatetoProps)(SingleArtistProject)
