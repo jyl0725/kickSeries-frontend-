@@ -24,10 +24,10 @@ class DisplayCompletedProjects extends React.Component{
   }
   render(){
     return(
-      <div id='snkr-card-container' onClick={this.setRedirect}>
+      <div id='snkr-card-container'>
         {this.renderSneaker()}
         <img src={this.props.image_url} alt='sneaker-pic' width ='200' height='200' />
-         <div>
+         <div onClick={this.setRedirect}>
         {this.props.title}
          </div>
       </div>

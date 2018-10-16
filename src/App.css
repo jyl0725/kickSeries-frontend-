@@ -17,3 +17,7 @@
 .snkr-card-container {
   border: 3px solid black;
 }
+
+.canvas {
+  outline: 1px solid black; 
+}

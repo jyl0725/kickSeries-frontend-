@@ -11,6 +11,8 @@ import SingleCompletedProjectDisplay from '../components/singleCompletedProjectD
 import SignUpForm from './SignUpForm';
 import SingleArtistProject from './SingleArtistProject'
 import {connect} from 'react-redux';
+import Login from '../containers/Login'
+import SingleDesignerProject from './SingleDesignerProject'
 import {SHOW_PROJECTS} from '../reducers/types';
 
 
@@ -46,6 +48,8 @@ class App extends Component {
             <Route exact path="/newprojectform" component={NewPojectForm}/>
             <Route exact path="/userprojectdisplay" component={UserProjectDisplay} />
             <Route exact path="/singlearistproject" component={SingleArtistProject} />
+            <Route exact path="/singledesignerproject" component={SingleDesignerProject} />
+            <Route exact path="/login" component={Login} />
           </React.Fragment>
         </Router>
 
