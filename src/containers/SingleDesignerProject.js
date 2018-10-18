@@ -29,7 +29,8 @@ class SingleDesignerProject extends React.Component{
     fetch(`http://localhost:4000/projects/${this.props.project.id}`,{
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+
       },
       method: 'PATCH',
       body: JSON.stringify({image_url: drawing })
@@ -38,7 +39,8 @@ class SingleDesignerProject extends React.Component{
     fetch(`http://localhost:4000/project_users`,{
       headers:{
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+      
       },
       method: 'POST',
       body: JSON.stringify({ project_id: this.props.project.id, user_id: this.props.currentUser.id })

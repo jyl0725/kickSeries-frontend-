@@ -7,6 +7,7 @@ const LogOut = (props) =>{
 
   const renderHome = () =>{
     props.logOut();
+    localStorage.removeItem('jwt')
     return <Redirect to='/' />
   }
 

@@ -23,7 +23,8 @@ class StoryTellerProjectForm extends React.Component{
     method: "POST",
     headers:{
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('jwt')}`
     },
     body: JSON.stringify({ title: this.state.title, story: this.state.story})
   })
@@ -35,6 +36,7 @@ class StoryTellerProjectForm extends React.Component{
     .then(res => res.json())
     .then(project => {
       const newProject = project.find(project => project.title === this.state.title);
+      console.log(project)
       this.props.showProject(project)
       this.props.setNewProject(newProject)
     })
@@ -43,13 +45,12 @@ class StoryTellerProjectForm extends React.Component{
         method: "POST",
         headers:{
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({user_id:this.props.currentUser.id, project_id: this.props.project.id})
       })
       .then(res => res.json())
       .then(pu => {
-        console.log(pu)
         let projects = this.props.projects
         let pro = this.props.projects.find(proj => proj.id === pu.project_id)
         pro.users.push(pu.user)
@@ -70,6 +71,7 @@ class StoryTellerProjectForm extends React.Component{
             Title:
           </label>
           <input type= 'text' name='title' value={this.state.title} onChange ={this.handleChange}/>
+          <br />
           <textarea  name='story' value={this.state.story} onChange={this.handleChange} style={{height:'100px', width:'450px'}}/>
           <input type='submit' value ='submit' />
         </form>

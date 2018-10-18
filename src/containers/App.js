@@ -14,7 +14,8 @@ import SingleDesignerProject from './SingleDesignerProject'
 import {connect} from 'react-redux';
 import Login from '../containers/Login'
 import LogOut from '../containers/Logout'
-import {SHOW_PROJECTS} from '../reducers/types';
+import {SHOW_PROJECTS, SET_CURRENT_USER} from '../reducers/types';
+import AppBar from '@material-ui/core/AppBar';
 
 
 
@@ -25,6 +26,14 @@ class App extends Component {
     fetch('http://localhost:4000/projects')
     .then(res => res.json())
     .then(projectsData => this.props.showProject(projectsData))
+
+    fetch('http://localhost:4000/profile',{
+      headers: {
+         Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      },
+      method: 'GET',
+    }).then(res=> res.json())
+    .then(data => this.props.setCurrentUser(data.user))
   }
 
   render() {
@@ -32,7 +41,9 @@ class App extends Component {
       <div className="app">
         <Router>
           <React.Fragment>
-            <NavBar/>
+            <AppBar position="static">
+              <NavBar/>
+            </AppBar>
             <Route exact path="/" render={Home}/>
             <Route exact path="/completedprojects" component={CompletedProjectsContainer}/>
             <Route exact path="/uncompletedprojects" component={UncompletedProjectsContainer}/>
@@ -54,7 +65,8 @@ class App extends Component {
 
 const mapDispatchtoProps =(dispatch) =>{
   return{
-   showProject: (projectsData) => {dispatch({type:SHOW_PROJECTS, payload: projectsData })}
+   showProject: (projectsData) => {dispatch({type:SHOW_PROJECTS, payload: projectsData })},
+   setCurrentUser: (user) =>{dispatch({type: SET_CURRENT_USER, payload: user})}
  }
 }
 

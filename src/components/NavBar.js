@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 
 const NavBar = (props) =>{
-
+  console.log(props.currentUser)
   return (
     <div id="navbarholder">
       <NavLink to="/" id='borderIcon'>

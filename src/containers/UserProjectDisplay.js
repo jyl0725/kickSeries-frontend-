@@ -4,37 +4,43 @@ import {FIND_USER_PROJECTS} from '../reducers/types'
 
 class UserProjectDisplay extends React.Component{
   componentDidMount(){
-    fetch(`http://localhost:4000/users/${this.props.currentUser.id}`)
+    fetch(`http://localhost:4000/users/${this.props.currentUser.id}`,{
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      },
+      method: 'GET',
+    })
     .then(res => res.json())
     .then(user => this.props.findUserProjects(user))
   }
 
   render(){
-    console.log(this.props.currentUser)
     return(
       <>
         {this.props.currentUser.projects && this.props.currentUser.projects.map(proj =>(
-         <div key={proj.id}>
-           <div> {proj.title}</div>
-           <div>{proj.image_url ? <img src={proj.image_url} alt='skrs'/> : null }</div>
-           <div>{proj.story}</div>
-         </div>
-      ))}
+       <div key={proj.id}>
+         <div> {proj.title}</div>
+         <div>{proj.image_url ? <img src={proj.image_url} alt='skrs'/> : null }</div>
+         <div>{proj.story}</div>
+       </div>
+     ))}
       </>
     )
   }
 }
 
-const mapStatetoProps = (state) =>{
+const mapStateToProps = (state) =>{
   return {
     currentUser: state.user.currentUser
   }
 }
 
-const mapDispatchtoProps =(dispatch) =>{
+const mapDispatchToProps =(dispatch) =>{
   return {
     findUserProjects: (data) => dispatch({type:FIND_USER_PROJECTS , payload: data })
   }
 }
 
-export default connect(mapStatetoProps, mapDispatchtoProps)(UserProjectDisplay)
+export default connect(mapStateToProps, mapDispatchToProps)(UserProjectDisplay)
