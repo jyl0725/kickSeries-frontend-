@@ -32,14 +32,11 @@ class SingleArtistProject extends React.Component{
       body: JSON.stringify({image_url: drawing })
     })
 
-    fetch(`http://localhost:4000/project_users`,{
-      headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({ project_id: this.props.project.id, user_id: this.props.currentUser.id })
-    })
+
+  }
+
+  handleChange(event){
+    console.log(event)
   }
 
 
@@ -54,9 +51,10 @@ class SingleArtistProject extends React.Component{
                      width='700px'
                      height='500px'
                      tool={this.state.tool}
+                     onChange={this.handleSave}
                      lineColor ='black'
                      lineWidth={3} />
-       <select value={this.state.tool} onChange={this.handleSelect}>
+                   <select value={this.state.tool} onChange={this.handleSelect}>
          <option value={Tools.Select}> Select</option>
          <option value={Tools.Pencil}> Pencil</option>
          <option value={Tools.Line}> Line</option>
