@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import DisplayCompletedProjects from '../components/displayCompletedProjects'
 import {SET_NEW_PROJECT, SHOW_PROJECTS, ADD_PROJECT_TO_PROJECTS, FIND_USER_PROJECTS} from '../reducers/types'
+import ProjectAdapter from '../adapters/projectAdapater'
 
 
 
@@ -9,8 +10,10 @@ import {SET_NEW_PROJECT, SHOW_PROJECTS, ADD_PROJECT_TO_PROJECTS, FIND_USER_PROJE
 class CompletedProjectsContainer extends React.Component{
 
   componentDidMount(){
-    fetch('http://localhost:4000/projects')
-    .then(res => res.json())
+    // fetch('http://localhost:4000/projects')
+    // .then(res => res.json())
+    // .then(projectsData => this.props.showProject(projectsData))
+    ProjectAdapter.fetchAllProject()
     .then(projectsData => this.props.showProject(projectsData))
   }
 

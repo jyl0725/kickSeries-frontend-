@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import '../App.css';
 import {FIND_PROJECT} from '../reducers/types'
 
+
 class SingleArtistProject extends React.Component{
   state ={
     tool: Tools.pencil
@@ -35,9 +36,6 @@ class SingleArtistProject extends React.Component{
 
   }
 
-  handleChange(event){
-    console.log(event)
-  }
 
 
   render(){

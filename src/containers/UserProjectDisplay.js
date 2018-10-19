@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {FIND_USER_PROJECTS} from '../reducers/types'
+import {ActionCable} from 'react-actioncable-provider'
 
 class UserProjectDisplay extends React.Component{
   componentDidMount(){
@@ -16,9 +17,21 @@ class UserProjectDisplay extends React.Component{
     .then(user => this.props.findUserProjects(user))
   }
 
+  // renderprojectImage = (data) =>{
+  //   let projects = [...this.props.currentUser.projects]
+  //   let currentProject = projects.find(pro => pro.id === data.id)
+  //   currentProject.image_url = data.image_url
+  //   console.log(currentProject)
+  //   // this.props.findUserProjects(user)
+  //   console.log(data.image_url)
+  //   console.log(this.props.currentUser.projects)
+  //
+  // }
+
   render(){
     return(
       <>
+      <ActionCable channel={{channel: 'ProjectChannel'}} onReceived={(data) => this.props.findImageUrl(data)}/>
         {this.props.currentUser.projects && this.props.currentUser.projects.map(proj =>(
        <div key={proj.id}>
          <div> {proj.title}</div>
@@ -39,7 +52,8 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps =(dispatch) =>{
   return {
-    findUserProjects: (data) => dispatch({type:FIND_USER_PROJECTS , payload: data })
+    findUserProjects: (data) => dispatch({type:FIND_USER_PROJECTS , payload: data }),
+    findImageUrl: (data) => dispatch({type:"UPDATE_IMAGE_URL", payload:data})
   }
 }
 

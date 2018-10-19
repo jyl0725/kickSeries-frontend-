@@ -8,6 +8,7 @@ import {Provider} from 'react-redux';
 import reducer from './reducers';
 import thunk from 'redux-thunk';
 import 'semantic-ui-css/semantic.min.css'
+import { ActionCableProvider } from 'react-actioncable-provider'
 
 
 const store = createStore(reducer, applyMiddleware(thunk))
@@ -15,7 +16,7 @@ const store = createStore(reducer, applyMiddleware(thunk))
 
 
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+ReactDOM.render(<ActionCableProvider url='ws://localhost:4000/cable'><Provider store={store}><App /></Provider></ActionCableProvider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

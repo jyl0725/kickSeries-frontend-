@@ -15,6 +15,13 @@ const userReducer = (state = initialState, action) =>{
       return {...state, currentUser:action.payload}
     case FAILED_LOGIN:
       return {...state, error:action.payload}
+    case "UPDATE_IMAGE_URL":
+      let newUser = {...state.currentUser}
+      let projects = [...state.currentUser.projects]
+      let currentProject = projects.find(pro => pro.id === action.payload.id)
+      currentProject.image_url = action.payload.image_url
+      newUser.projects = projects
+      return {...state, currentUser: newUser}
     case LOG_OUT:
       return {currentUser: ''}
 

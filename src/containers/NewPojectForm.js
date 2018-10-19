@@ -3,6 +3,7 @@ import {Tools} from 'react-sketch';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom'
 import {SET_NEW_PROJECT, SHOW_PROJECTS, ADD_PROJECT_TO_PROJECTS, FIND_USER_PROJECTS} from '../reducers/types'
+import ProjectAdapter from '../adapters/projectAdapater'
 
 class StoryTellerProjectForm extends React.Component{
 
@@ -19,16 +20,8 @@ class StoryTellerProjectForm extends React.Component{
 
   handleSubmit = (event) =>{
     event.preventDefault();
-    fetch('http://localhost:4000/projects/', {
-    method: "POST",
-    headers:{
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('jwt')}`
-    },
-    body: JSON.stringify({ title: this.state.title, story: this.state.story})
-  })
-  .then(res => this.fetchCurretProject())
+    ProjectAdapter.postProject(this.state.title, this.state.story)
+    .then(res => this.fetchCurretProject())
   }
 
   fetchCurretProject = () =>{
