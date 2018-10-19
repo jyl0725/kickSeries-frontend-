@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.2.2",
+    "lightbox-react": "^0.3.6",
     "material-ui": "^0.20.2",
     "react": "^16.5.2",
     "react-actioncable-provider": "^1.0.3",
