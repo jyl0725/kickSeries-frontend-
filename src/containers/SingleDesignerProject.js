@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Tools, SketchField} from 'react-sketch';
 import {CirclePicker} from 'react-color'
+import ProjectAdapter from '../adapters/projectAdapter'
 
 
 class SingleDesignerProject extends React.Component{
@@ -9,6 +10,7 @@ class SingleDesignerProject extends React.Component{
     tool: Tools.pencil,
     color: 'white',
     lineWidth: 3,
+    canUndo: false,
   }
 
   handleColorChange = (color) =>{
@@ -22,19 +24,24 @@ class SingleDesignerProject extends React.Component{
 
   undo = () =>{
     this._sketch.undo()
+    this.setState({
+     canUndo: this._sketch.canUndo(),
+   })
   }
 
-  handleSave = () =>{
-    const drawing = this._sketch.toDataURL()
-    fetch(`http://localhost:4000/projects/${this.props.project.id}`,{
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+  handleSave = (event) =>{
+    event.preventDefault();
+    this.sketchChange();
+    const drawing = this._sketch.toDataURL("image/jpeg")
+    ProjectAdapter.fetchPatchProject(this.props.project.id, drawing)
+  }
 
-      },
-      method: 'PATCH',
-      body: JSON.stringify({image_url: drawing })
-    })
+  sketchChange = () =>{
+    let prev = this.state.canUndo;
+    let now = this._sketch.canUndo();
+    if (prev !== now) {
+      this.setState({canUndo: now});
+    }
   }
 
 
@@ -43,6 +50,7 @@ class SingleDesignerProject extends React.Component{
     return(
       <div>
         <div>{this.props.project.title}</div>
+        <div>{this.props.project.story}</div>
         <div> Pick a Color</div>
         <CirclePicker color={this.state.color} onChangeComplete={this.handleColorChange} />
         <SketchField id='canvas'
@@ -55,11 +63,7 @@ class SingleDesignerProject extends React.Component{
                      lineWidth={this.state.lineWidth}/>
                    <label> Edit LineWidth </label>
         <input type='number' value={this.state.lineWidth} onChange={this.handleLineChange}/>
-        <button onClick={this.handleSave}>save Canvas </button>
-        <button onClick={this.undo}> Undo</button>
-
-      <div>{this.props.project.story}</div>
-
+        {this.state.canUndo && <button onClick={this.undo}> Undo</button>}
     </div>
     )
   }

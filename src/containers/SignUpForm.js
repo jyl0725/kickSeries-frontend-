@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import {SET_CURRENT_USER} from '../reducers/types'
 import {Redirect} from 'react-router-dom'
 import { Button, Form, Dropdown } from 'semantic-ui-react'
-// import userAdapter from '../adapters/userAdapter'
+import UserAdapter from '../adapters/userAdapter'
+
 
 
 class SignUpForm extends React.Component{
@@ -29,33 +30,13 @@ class SignUpForm extends React.Component{
 
   createAndSetCurrentUser = (event) =>{
     event.preventDefault();
-    // userAdapter.postUser(this.props.form);
-    fetch('http://localhost:4000/users/', {
-    method: "POST",
-    headers:{
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ name: this.state.name, username: this.state.username, password: this.state.password, role: this.state.role })
-  }).then(res => res.json())
-  .then(data =>{
+    UserAdapter.fetchPostUser(this.state.name, this.state.username, this.state.password, this.state.role)
+    .then(data =>{
     this.props.setCurrentUser(data.user);
     localStorage.setItem('jwt', data.jwt);
-  }).then(()=> this.setState({name: '', password: '', role:'', redirect: true}))
-  // .then(res => this.fetchCurrentUser())
-
+    }).then(()=> this.setState({name: '', password: '', role:'', redirect: true}))
   }
 
-  // fetchCurrentUser = () =>{
-  //   fetch('http://localhost:4000/users/')
-  //   .then(res => res.json())
-  //   .then(users => {
-  //     const currentUser = users.find(user => user.username === this.state.username);
-  //     this.props.setCurrentUser(currentUser)
-  //     console.log(currentUser)
-  //   })
-  //   .then(this.setState({ name: '', password: '', role:'', redirect: true}))
-  // }
 
   renderUserStartPage = () =>{
     if(this.state.redirect){
@@ -90,12 +71,6 @@ class SignUpForm extends React.Component{
   }
 }
 
-// const mapStatetoProps = (state) =>{
-//   return {
-//     form: state.user.form,
-//     password: state.user.form.password
-//   }
-// }
 const mapDispatchtoProps = (dispatch) =>{
   return{
     setCurrentUser: (currentUser) => dispatch({type: SET_CURRENT_USER, payload:currentUser})

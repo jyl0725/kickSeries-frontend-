@@ -17,6 +17,17 @@ class ProjectAdapter {
       body: JSON.stringify({ title: title, story: story, image_url: image_url })
     });
   }
+
+  static fetchPatchProject(projectId, drawing){
+    return fetch(`${api}/${projectId}`,{
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'PATCH',
+      body: JSON.stringify({image_url: drawing })
+    })
+  }
 }
 
 export default ProjectAdapter

@@ -12,7 +12,6 @@ import {Redirect} from 'react-router-dom'
 class CompletedProjectsContainer extends React.Component{
   state ={
     redirect:false,
-    projects: this.props.projects,
     index: 0,
   }
 
@@ -25,22 +24,17 @@ class CompletedProjectsContainer extends React.Component{
     .then(projectsData => this.props.showProject(projectsData))
   }
 
-  renderProjectUsers = () =>{
-    return this.completedProjects().map(proj => proj.users).map()
-      // return (<div key= {user.id}> User: {user.name} Role: {user.role}</div>)
-  }
 
   projectImage = () =>{
     return this.completedProjects().map(pro => pro.image_url)
   }
 
   projectStory = () =>{
-    return this.completedProjects().map(pro => pro.story)
-           // this.renderProjectUsers()
+    return this.completedProjects().map(pro => `${pro.title}: ${pro.story}`)
 
   }
-  projectTitle = () =>{
-    return this.completedProjects().map(pro => pro.title)
+  projectUsers = () =>{
+    return this.completedProjects().map(pro => pro.title) && this.completedProjects().map(pro => pro.users.map(user => `${user.username} Role: ${user.role} `))
   }
 
   openLightbox =() => {
@@ -68,38 +62,17 @@ class CompletedProjectsContainer extends React.Component{
   }
 
   render(){
-    let lightbox;
-    if (this.state.isOpen) {
-      lightbox = (
-        <Lightbox
-          mainSrc={this.projectImage()[this.state.index]}
-          nextSrc={this.projectImage()[(this.state.index + 1) % this.projectImage().length]}
-          prevSrc={this.projectImage()[(this.state.index + this.projectImage().length - 1) % this.projectImage().length]
-          }
-
-          onCloseRequest={this.closeLightbox}
-          onMovePrevRequest={this.movePrev}
-          onMoveNextRequest={this.moveNext}
-
-          imageTitle={this.projectTitle()[this.state.index]}
-          imageCaption={this.projectStory()[this.state.index]}
-        /> )
-    }
-
     return(
       <div>
         {this.redirectHomeOnClose()}
         <Lightbox
           mainSrc={this.projectImage()[this.state.index]}
           nextSrc={this.projectImage()[(this.state.index + 1) % this.projectImage().length]}
-          prevSrc={this.projectImage()[(this.state.index + this.projectImage().length - 1) % this.projectImage().length]
-          }
-
+          prevSrc={this.projectImage()[(this.state.index + this.projectImage().length - 1) % this.projectImage().length]}
           onCloseRequest={this.closeLightbox}
           onMovePrevRequest={this.movePrev}
           onMoveNextRequest={this.moveNext}
-
-          imageTitle={this.projectTitle()[this.state.index]}
+          imageTitle={this.projectUsers()[this.state.index]}
           imageCaption={this.projectStory()[this.state.index]}
         />
       </div>
