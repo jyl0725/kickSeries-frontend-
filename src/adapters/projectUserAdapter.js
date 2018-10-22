@@ -1,18 +1,23 @@
-const projectUserAdapter = {
-  api : 'http://localhost:4000/project_users/',
-  allProjectUsers:
-    return fetch(this.api)
-    .then(res => res.json()),
-  postProjectUser: (userId, projectId) =>{
-    return fetch(this.api, {
+const api = 'http://localhost:4000/project_users/'
+
+class ProjectUserAdapter {
+
+  static fetchAllProjectUsers(){
+    return fetch(api)
+      .then(res => res.json())
+  }
+
+  static postProjectUser(pid, uid){
+    return fetch(api, {
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
       method: "POST",
-      body: JSON.stringify({ user_id: userId, project_id: ProjectId })
+      body: JSON.stringify({ project_id: pid, user_id: uid })
     });
-    .then(res => res.json())
-  },
-  deleteProjectUser: (id) => {
-     return fetch(this.api`${id}`, { method: "DELETE" })
-  },
+  }
 }
 
-export default projectUserAdapter
+
+export default ProjectUserAdapter

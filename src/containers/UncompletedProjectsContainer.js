@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {FIND_PROJECT, SHOW_PROJECTS} from '../reducers/types'
+import ProjectAdapter from '../adapters/projectAdapter'
+import ProjectUserAdapter from '../adapters/projectUserAdapter'
 
 class UncompletedProjectsContainer extends React.Component{
 
@@ -11,14 +13,12 @@ class UncompletedProjectsContainer extends React.Component{
   }
 
   componentDidMount(){
-    fetch('http://localhost:4000/projects/')
-    .then(res => res.json())
+    ProjectAdapter.fetchAllProject()
     .then(projectData => this.props.showProjects(projectData))
   }
 
   handleClick =(event) =>{
-    console.log(this.props.projects)
-    const project = this.props.projects.find(p => p.title === event.target.innerText)
+    const project = this.props.projects.find(p => p.title.split(' ').join('')  === event.target.innerText.split(' ').join(''))
     this.props.findProject(project)
     if(this.props.currentUser.role === 'artist'){
       this.setState({redirectArtist :true})
@@ -26,13 +26,13 @@ class UncompletedProjectsContainer extends React.Component{
       this.setState({redirectDesigner: true})
     }
     fetch(`http://localhost:4000/project_users`,{
-      headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({ project_id: project.id, user_id: this.props.currentUser.id })
-    })
+       headers:{
+       'Accept': 'application/json',
+       'Content-Type': 'application/json'
+        },
+       method: 'POST',
+       body: JSON.stringify({ project_id: project.id, user_id: this.props.currentUser.id })
+      })
   }
 
   redirectStoryTeller(){

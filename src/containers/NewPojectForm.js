@@ -3,7 +3,7 @@ import {Tools} from 'react-sketch';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom'
 import {SET_NEW_PROJECT, SHOW_PROJECTS, ADD_PROJECT_TO_PROJECTS, FIND_USER_PROJECTS} from '../reducers/types'
-import ProjectAdapter from '../adapters/projectAdapater'
+import ProjectAdapter from '../adapters/projectAdapter'
 
 class StoryTellerProjectForm extends React.Component{
 

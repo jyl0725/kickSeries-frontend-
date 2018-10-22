@@ -1,30 +1,107 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import DisplayCompletedProjects from '../components/displayCompletedProjects'
 import {SET_NEW_PROJECT, SHOW_PROJECTS, ADD_PROJECT_TO_PROJECTS, FIND_USER_PROJECTS} from '../reducers/types'
-import ProjectAdapter from '../adapters/projectAdapater'
+import ProjectAdapter from '../adapters/projectAdapter'
+import Lightbox from 'lightbox-react';
+import 'lightbox-react/style.css';
+import {Redirect} from 'react-router-dom'
 
 
 
 
 class CompletedProjectsContainer extends React.Component{
+  state ={
+    redirect:false,
+    projects: this.props.projects,
+    index: 0,
+  }
+
+  completedProjects = () =>{
+    return this.props.projects.filter(proj => proj.users.length === 3)
+  }
 
   componentDidMount(){
-    // fetch('http://localhost:4000/projects')
-    // .then(res => res.json())
-    // .then(projectsData => this.props.showProject(projectsData))
     ProjectAdapter.fetchAllProject()
     .then(projectsData => this.props.showProject(projectsData))
   }
 
-  renderCompletedProject(){
-    return  this.props.projects.filter(p => p.users.length === 3)
-      .map(pro => <DisplayCompletedProjects key={pro.id} {...pro} />)
+  renderProjectUsers = () =>{
+    return this.completedProjects().map(proj => proj.users).map()
+      // return (<div key= {user.id}> User: {user.name} Role: {user.role}</div>)
   }
+
+  projectImage = () =>{
+    return this.completedProjects().map(pro => pro.image_url)
+  }
+
+  projectStory = () =>{
+    return this.completedProjects().map(pro => pro.story)
+           // this.renderProjectUsers()
+
+  }
+  projectTitle = () =>{
+    return this.completedProjects().map(pro => pro.title)
+  }
+
+  openLightbox =() => {
+      this.setState({ isOpen: true });
+    }
+
+  closeLightbox =()=> {
+    this.setState({ redirect: true });
+  }
+
+  redirectHomeOnClose = () =>{
+    if(this.state.redirect){
+      return <Redirect to="/" />
+    }
+  }
+
+  moveNext =() => {
+  this.setState({ index: (this.state.index + 1) % this.projectImage().length });
+  }
+
+  movePrev =() => {
+    this.setState({
+      index: (this.state.index + this.projectImage().length - 1) % this.projectImage().length,
+    });
+  }
+
   render(){
+    let lightbox;
+    if (this.state.isOpen) {
+      lightbox = (
+        <Lightbox
+          mainSrc={this.projectImage()[this.state.index]}
+          nextSrc={this.projectImage()[(this.state.index + 1) % this.projectImage().length]}
+          prevSrc={this.projectImage()[(this.state.index + this.projectImage().length - 1) % this.projectImage().length]
+          }
+
+          onCloseRequest={this.closeLightbox}
+          onMovePrevRequest={this.movePrev}
+          onMoveNextRequest={this.moveNext}
+
+          imageTitle={this.projectTitle()[this.state.index]}
+          imageCaption={this.projectStory()[this.state.index]}
+        /> )
+    }
+
     return(
       <div>
-        {this.renderCompletedProject()}
+        {this.redirectHomeOnClose()}
+        <Lightbox
+          mainSrc={this.projectImage()[this.state.index]}
+          nextSrc={this.projectImage()[(this.state.index + 1) % this.projectImage().length]}
+          prevSrc={this.projectImage()[(this.state.index + this.projectImage().length - 1) % this.projectImage().length]
+          }
+
+          onCloseRequest={this.closeLightbox}
+          onMovePrevRequest={this.movePrev}
+          onMoveNextRequest={this.moveNext}
+
+          imageTitle={this.projectTitle()[this.state.index]}
+          imageCaption={this.projectStory()[this.state.index]}
+        />
       </div>
     )
   }

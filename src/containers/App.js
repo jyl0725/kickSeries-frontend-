@@ -7,7 +7,6 @@ import NewPojectForm from './NewPojectForm';
 import UserProjectDisplay from './UserProjectDisplay'
 import Home from '../components/Home';
 import NavBar from '../components/NavBar';
-import SingleCompletedProjectDisplay from '../components/singleCompletedProjectDisplay'
 import SignUpForm from './SignUpForm';
 import SingleArtistProject from './SingleArtistProject'
 import SingleDesignerProject from './SingleDesignerProject'
@@ -48,7 +47,6 @@ class App extends Component {
             <Route exact path="/completedprojects" component={CompletedProjectsContainer}/>
             <Route exact path="/uncompletedprojects" component={UncompletedProjectsContainer}/>
             <Route exact path="/SignUp" component={SignUpForm}/>
-            <Route exact path="/singleCompletedProjectDisplay" component={SingleCompletedProjectDisplay}/>
             <Route exact path="/newprojectform" component={NewPojectForm}/>
             <Route exact path="/userprojectdisplay" component={UserProjectDisplay} />
             <Route exact path="/singlearistproject" component={SingleArtistProject} />
