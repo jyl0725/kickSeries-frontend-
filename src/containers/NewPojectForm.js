@@ -2,8 +2,9 @@ import React from 'react'
 import {Tools} from 'react-sketch';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom'
-import {SET_NEW_PROJECT, SHOW_PROJECTS, ADD_PROJECT_TO_PROJECTS, FIND_USER_PROJECTS} from '../reducers/types'
+import {SET_NEW_PROJECT, SHOW_PROJECTS, ADD_PROJECT_TO_PROJECTS, FIND_USER_PROJECTS, PROJECT_TITLE_TAKEN} from '../reducers/types'
 import ProjectAdapter from '../adapters/projectAdapter'
+import { Message } from 'semantic-ui-react'
 
 class StoryTellerProjectForm extends React.Component{
 
@@ -21,7 +22,8 @@ class StoryTellerProjectForm extends React.Component{
   handleSubmit = (event) =>{
     event.preventDefault();
     ProjectAdapter.postProject(this.state.title, this.state.story)
-    .then(res => this.fetchCurretProject())
+    .then(data => this.fetchCurretProject())
+    .catch(res => res.json().then(e => this.props.projectTitleError(e.error)))
   }
 
   fetchCurretProject = () =>{
@@ -29,7 +31,6 @@ class StoryTellerProjectForm extends React.Component{
     .then(res => res.json())
     .then(project => {
       const newProject = project.find(project => project.title === this.state.title);
-      console.log(project)
       this.props.showProject(project)
       this.props.setNewProject(newProject)
     })
@@ -55,9 +56,11 @@ class StoryTellerProjectForm extends React.Component{
   }
 
   render(){
+    console.log(this.props.error)
     return (
       (this.props.currentUser && this.props.currentUser.role === 'story teller') ?
       <div>
+          {this.props.error && <Message error header={this.props.error} />}
         <h1> Create your own Story </h1>
         <form onSubmit={this.handleSubmit}>
           <label>
@@ -80,11 +83,13 @@ const mapDispatchtoProps =(dispatch) =>{
     setNewProject: (newProject) => dispatch({type:SET_NEW_PROJECT, payload: newProject}),
     showProject: (project) => dispatch({type: SHOW_PROJECTS ,payload: project}),
     addProjectToProjects: (project) => dispatch({type: ADD_PROJECT_TO_PROJECTS, payload:project}),
-    findUserProjects: (data) => dispatch({type:FIND_USER_PROJECTS, payload: data })
+    findUserProjects: (data) => dispatch({type:FIND_USER_PROJECTS, payload: data }),
+    projectTitleError: (error) =>dispatch({type:PROJECT_TITLE_TAKEN, payload:error}),
   }
 }
 const mapStatetoProps = (state) =>{
   return {
+    error: state.project.error,
     currentUser: state.user.currentUser,
     project: state.project.project,
     projects: state.project.projects,

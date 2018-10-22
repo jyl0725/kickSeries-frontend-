@@ -14,7 +14,7 @@ const NavBar = (props) =>{
       <NavLink className='project' to="/completedprojects">All Completed Project</NavLink>
       {
          props.currentUser ?
-         <div key={props.currentUser.id}> Hi {props.currentUser.username}
+         <div key={props.currentUser.id}> Hi {props.currentUser.name}
            <div>
              <NavLink className='project' to="/userprojectdisplay">All Your Project</NavLink>
              <NavLink className='project' to="/uncompletedprojects">Work on a Project</NavLink>

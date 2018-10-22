@@ -2,21 +2,13 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {FIND_USER_PROJECTS} from '../reducers/types'
 import {ActionCable} from 'react-actioncable-provider'
+import UserAdapter from '../adapters/userAdapter'
 
 class UserProjectDisplay extends React.Component{
   componentDidMount(){
-    fetch(`http://localhost:4000/users/${this.props.currentUser.id}`,{
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('jwt')}`
-      },
-      method: 'GET',
-    })
-    .then(res => res.json())
+    UserAdapter.fetchCurrentUser(this.props.currentUser.id)
     .then(user => this.props.findUserProjects(user))
   }
-
 
   render(){
     return(

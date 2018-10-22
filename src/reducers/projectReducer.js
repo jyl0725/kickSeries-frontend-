@@ -1,9 +1,10 @@
-import {SHOW_PROJECTS, FIND_PROJECT, SET_NEW_PROJECT, ADD_PROJECT_TO_PROJECTS} from './types'
+import {SHOW_PROJECTS, FIND_PROJECT, SET_NEW_PROJECT, ADD_PROJECT_TO_PROJECTS, PROJECT_TITLE_TAKEN} from './types'
 
 const initialState = {
   projects: [],
   project: null,
-  projectName: ''
+  projectName: '',
+  errors: '',
 }
 
   const projectReducer = (state = initialState, action) =>{
@@ -16,6 +17,8 @@ const initialState = {
         return {...state, project: action.payload}
       case ADD_PROJECT_TO_PROJECTS:
         return{...state, projects: action.payload}
+      case PROJECT_TITLE_TAKEN:
+        return{...state, error: action.payload}
       default:
         return state
     }

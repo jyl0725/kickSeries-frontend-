@@ -1,4 +1,4 @@
-import {SET_NEW_USER ,  SET_CURRENT_USER, FIND_USER_PROJECTS, LOG_OUT, FAILED_LOGIN} from './types'
+import {SET_NEW_USER ,  SET_CURRENT_USER, FIND_USER_PROJECTS, LOG_OUT, FAILED_LOGIN, FAILED_SIGNUP} from './types'
 
 const initialState = {
   currentUser: null,
@@ -14,6 +14,8 @@ const userReducer = (state = initialState, action) =>{
     case FIND_USER_PROJECTS:
       return {...state, currentUser:action.payload}
     case FAILED_LOGIN:
+      return {...state, error:action.payload}
+    case FAILED_SIGNUP:
       return {...state, error:action.payload}
     case "UPDATE_IMAGE_URL":
       let newUser = {...state.currentUser}

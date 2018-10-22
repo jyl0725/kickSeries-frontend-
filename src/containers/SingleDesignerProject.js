@@ -32,7 +32,7 @@ class SingleDesignerProject extends React.Component{
   handleSave = (event) =>{
     event.preventDefault();
     this.sketchChange();
-    const drawing = this._sketch.toDataURL("image/jpeg")
+    const drawing = this._sketch.toDataURL()
     ProjectAdapter.fetchPatchProject(this.props.project.id, drawing)
   }
 

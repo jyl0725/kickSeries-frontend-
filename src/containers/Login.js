@@ -38,10 +38,6 @@ class Login extends React.Component{
      })
      .then(()=> this.setState({username: '', password:'', redirect: true}))
      .catch(r => r.json().then(e => this.props.failedSetUser(e.message)))
-     // .then((jsonResponse) => {
-     //   localStorage.setItem('jwt', jsonResponse.jwt)
-     //   dispatch(setCurrentUser(jsonResponse.user))
-     // })
  }
 
    renderUserStartPage = () =>{
@@ -55,7 +51,7 @@ class Login extends React.Component{
     return(
       <form onSubmit={this.handleSubmit}>
         {this.renderUserStartPage()}
-        <Message error header={this.props.error && this.props.error} />
+        {this.props.error && <Message error header={this.props.error} />}
         <label>UserName</label>
         <input name='username' type='text' value={this.state.username} onChange={this.onChange} />
         <label>Password</label>

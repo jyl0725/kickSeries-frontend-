@@ -35,7 +35,7 @@ class SingleArtistProject extends React.Component{
 
   handleSave =(event) =>{
     this.sketchChange();
-    const drawing = this._sketch.toDataURL("image/jpeg");
+    const drawing = this._sketch.toDataURL();
     ProjectAdapter.fetchPatchProject(this.props.project.id, drawing)
   }
 

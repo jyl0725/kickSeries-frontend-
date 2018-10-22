@@ -15,6 +15,12 @@ class ProjectAdapter {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ title: title, story: story, image_url: image_url })
+    }).then(res => {
+      if(res.ok){
+        return res.json()
+      }else{
+        throw res
+      }
     });
   }
 

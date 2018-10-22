@@ -1,9 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {SET_CURRENT_USER} from '../reducers/types'
+import {SET_CURRENT_USER, FAILED_SIGNUP} from '../reducers/types'
 import {Redirect} from 'react-router-dom'
 import { Button, Form, Dropdown } from 'semantic-ui-react'
 import UserAdapter from '../adapters/userAdapter'
+import { Message } from 'semantic-ui-react'
 
 
 
@@ -35,8 +36,12 @@ class SignUpForm extends React.Component{
     this.props.setCurrentUser(data.user);
     localStorage.setItem('jwt', data.jwt);
     }).then(()=> this.setState({name: '', password: '', role:'', redirect: true}))
+    .catch(r => r.json().then(e => this.props.failedSignUp(e.error)))
   }
 
+  renderErrors = () =>{
+    return Array.isArray(this.props.error) ? this.props.error.map(err => `|${err}|`): this.props.error
+  }
 
   renderUserStartPage = () =>{
     if(this.state.redirect){
@@ -45,8 +50,11 @@ class SignUpForm extends React.Component{
   }
 
   render(){
+    console.log(this.props.error)
     const options = [{ key: 1, text: 'story teller', name: 'story teller', value: 'story teller' }, { key: 2, text: 'artist', name: 'artist', value: 'artist' }, { key: 3, text: 'designer', name: 'designer', value: 'designer' }]
     return (
+      <>
+      {this.props.error && <Message error header={this.renderErrors()} />}
       <Form onSubmit={this.createAndSetCurrentUser}>
         {this.renderUserStartPage()}
         <Form.Field>
@@ -64,16 +72,21 @@ class SignUpForm extends React.Component{
       <Dropdown placeholder='Role' compact selection options={options} onChange={this.handleSelectionChange} />
         <Button type='submit'>Submit</Button>
     </Form>
-
-
-
+    </>
     )
+  }
+}
+
+const mapStateToProps = state => {
+  return{
+    error: state.user.error
   }
 }
 
 const mapDispatchtoProps = (dispatch) =>{
   return{
-    setCurrentUser: (currentUser) => dispatch({type: SET_CURRENT_USER, payload:currentUser})
+    setCurrentUser: (currentUser) => dispatch({type: SET_CURRENT_USER, payload:currentUser}),
+    failedSignUp: (error) => dispatch({type: FAILED_SIGNUP, payload:error})
   }
 }
-export default connect(null, mapDispatchtoProps)(SignUpForm)
+export default connect(mapStateToProps, mapDispatchtoProps)(SignUpForm)
