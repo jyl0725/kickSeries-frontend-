@@ -1,34 +1,45 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Menu, Segment } from 'semantic-ui-react'
 
 
-const NavBar = (props) =>{
-  console.log(props.currentUser)
-  return (
-    <div id="navbarholder">
-      <NavLink to="/" id='borderIcon'>
-        <img src="https://image.flaticon.com/icons/svg/1138/1138856.svg" height="42" width="42" alt='app_icon'/>
-      </NavLink>
-      <div id='navbartitle'>Kick Series</div>
-      <NavLink className='project' to="/completedprojects">All Completed Project</NavLink>
-      {
-         props.currentUser ?
-         <div key={props.currentUser.id}> Hi {props.currentUser.name}
-           <div>
-             <NavLink className='project' to="/userprojectdisplay">All Your Project</NavLink>
-             <NavLink className='project' to="/uncompletedprojects">Work on a Project</NavLink>
-             <NavLink className='project' to="/logout">Log Out</NavLink>
-           </div>
-         </div> :
-        <div>
+class NavBar extends React.Component{
 
-          <NavLink className='project' to="/login">Login</NavLink>
-          <NavLink className='project' to="/signUp">Sign Up</NavLink>
-        </div>
+  state = {
+    activeItem: '',
+  }
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+  render(){
+      console.log(this.props.currentUser)
+       const { activeItem } = this.state
+    return (
+      <Segment inverted>
+        <Menu inverted secondary>
+        <NavLink to="/" id='borderIcon'>
+          <img src="https://image.flaticon.com/icons/svg/1138/1138856.svg" height="42" width="42" alt='app_icon'/>
+        </NavLink>
+        <div id='navbartitle'>Kick Series</div>
+        <Menu.Item  as={NavLink} exact to='/completedProjects' content='All Completed Projects' />
+      {this.props.currentUser ?
+        <>
+         <Menu.Item  as={NavLink} exact to='/userprojectdisplay' content='All Your Project' />
+         <Menu.Item  as={NavLink} exact to='/uncompletedprojects' content='Work on a Project' />
+         <Menu.Menu position='right'>
+         <Menu.Item  as={NavLink} exact to='/logout' content='Log Out' />
+         </Menu.Menu>
+        </> :
+        <Menu.Menu position='right'>
+          <Menu.Item  as={NavLink} exact to='/login' content='Login' />
+          <Menu.Item  as={NavLink} exact to='/signUp' content='Sign Up' />
+        </Menu.Menu>
       }
-    </div>
-  );
+        </Menu>
+      </Segment>
+    );
+    }
 }
 
 

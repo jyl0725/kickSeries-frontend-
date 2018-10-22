@@ -1,3 +1,19 @@
-header{
-  background-color: 'black' !important;
+#navbartitle {
+  color: White;
+  font-family: 'Pacifico', cursive;
+  font-size: 30pt;
+  padding-top: 12px
+}
+
+
+.app {
+  background-color: black;
+}
+
+body {
+  background-color: black !important;
+}
+
+label {
+  color: white !important;
 }

@@ -14,7 +14,7 @@ import {connect} from 'react-redux';
 import Login from '../containers/Login'
 import LogOut from '../containers/Logout'
 import {SHOW_PROJECTS, SET_CURRENT_USER} from '../reducers/types';
-import { Menu, Segment } from 'semantic-ui-react'
+
 
 
 
@@ -40,7 +40,7 @@ class App extends Component {
       <div className="app">
         <Router>
           <React.Fragment>
-              <NavBar/>
+            <NavBar/>
             <Route exact path="/" render={Home}/>
             <Route exact path="/completedprojects" component={CompletedProjectsContainer}/>
             <Route exact path="/uncompletedprojects" component={UncompletedProjectsContainer}/>
