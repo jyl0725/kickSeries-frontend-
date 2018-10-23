@@ -4,6 +4,7 @@ import {SET_CURRENT_USER, FAILED_SIGNUP, CHANGE_SIGNUP_LOGIN} from '../reducers/
 import {Redirect} from 'react-router-dom'
 import { Button, Form, Dropdown, Message } from 'semantic-ui-react'
 import UserAdapter from '../adapters/userAdapter'
+import exist from '../hocs/exist'
 
 class SignUpForm extends React.Component{
   state = {
@@ -91,4 +92,4 @@ const mapDispatchtoProps = (dispatch) =>{
     clearError: () => dispatch({type:CHANGE_SIGNUP_LOGIN}),
   }
 }
-export default connect(mapStateToProps, mapDispatchtoProps)(SignUpForm)
+export default exist(connect(mapStateToProps, mapDispatchtoProps)(SignUpForm))

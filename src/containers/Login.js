@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {SET_CURRENT_USER, FAILED_LOGIN, CHANGE_SIGNUP_LOGIN} from '../reducers/types'
 import { Message ,Button, Form } from 'semantic-ui-react'
+import exist from '../hocs/exist'
 
 class Login extends React.Component{
   state ={
@@ -71,7 +72,8 @@ class Login extends React.Component{
 
 const mapStateToProps = state =>{
   return{
-    error: state.user.error
+    error: state.user.error,
+    currentUser: state.user.currentUser,
   }
 }
 const mapDispatchToProps = dispatch =>{
@@ -83,4 +85,4 @@ const mapDispatchToProps = dispatch =>{
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default exist(connect(mapStateToProps, mapDispatchToProps)(Login))

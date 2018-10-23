@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import '../App.css';
 import {FIND_PROJECT, SAVE_DRAWING} from '../reducers/types'
 import ProjectAdapter from '../adapters/projectAdapter'
+import exist from '../hocs/exist'
 
 
 class SingleArtistProject extends React.Component{
@@ -74,4 +75,4 @@ const mapStatetoProps = state =>{
 
 
 
-export default connect(mapStatetoProps)(SingleArtistProject)
+export default exist(connect(mapStatetoProps)(SingleArtistProject))

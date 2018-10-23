@@ -15,6 +15,7 @@ import Login from '../containers/Login'
 import LogOut from '../containers/Logout'
 import {SHOW_PROJECTS, SET_CURRENT_USER} from '../reducers/types';
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
+import EditProject from './EditProject'
 
 
 
@@ -43,6 +44,7 @@ class App extends Component {
           <NavBar/>
             <Switch >
               <Route exact path="/" render={Home}/>
+              <Route exact path="/" render={EditProject} />
               <Route exact path="/completedprojects" component={CompletedProjectsContainer}/>
               <Route exact path="/uncompletedprojects" component={UncompletedProjectsContainer}/>
               <Route exact path="/SignUp" component={SignUpForm}/>

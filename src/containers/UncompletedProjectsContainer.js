@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom'
 import {FIND_PROJECT, SHOW_PROJECTS} from '../reducers/types'
 import ProjectAdapter from '../adapters/projectAdapter'
 import ProjectUserAdapter from '../adapters/projectUserAdapter'
+import exist from '../hocs/exist'
 
 class UncompletedProjectsContainer extends React.Component{
 
@@ -105,4 +106,4 @@ const mapDispatchtoProps = dispatch =>{
   }
 }
 
-export default connect(mapStatetoProps, mapDispatchtoProps)(UncompletedProjectsContainer)
+export default exist(connect(mapStatetoProps, mapDispatchtoProps)(UncompletedProjectsContainer))

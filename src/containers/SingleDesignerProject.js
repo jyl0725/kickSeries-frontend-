@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Tools, SketchField} from 'react-sketch';
 import {CirclePicker} from 'react-color'
 import ProjectAdapter from '../adapters/projectAdapter'
+import exist from '../hocs/exist'
 
 
 class SingleDesignerProject extends React.Component{

@@ -6,6 +6,7 @@ import {SET_NEW_PROJECT, SHOW_PROJECTS, ADD_PROJECT_TO_PROJECTS, FIND_USER_PROJE
 import ProjectAdapter from '../adapters/projectAdapter'
 import { Form, Message, Header,Button, TextArea } from 'semantic-ui-react'
 import sneakerButton from '../assets/sneakers.png'
+import exist from '../hocs/exist'
 
 class StoryTellerProjectForm extends React.Component{
 

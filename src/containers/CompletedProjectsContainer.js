@@ -6,9 +6,6 @@ import Lightbox from 'lightbox-react';
 import 'lightbox-react/style.css';
 import {Redirect} from 'react-router-dom'
 
-
-
-
 class CompletedProjectsContainer extends React.Component{
   state ={
     redirect:false,
@@ -30,11 +27,11 @@ class CompletedProjectsContainer extends React.Component{
   }
 
   projectStory = () =>{
-    return this.completedProjects().map(pro => `${pro.title}: ${pro.story}`)
+    return this.completedProjects().map(pro => pro.story)
 
   }
   projectUsers = () =>{
-    return this.completedProjects().map(pro => pro.title) && this.completedProjects().map(pro => pro.users.map(user => `User: ${user.username}, Role: ${user.role} `))
+    return this.completedProjects().map(pro => pro.title)
   }
 
   openLightbox =() => {
@@ -42,7 +39,7 @@ class CompletedProjectsContainer extends React.Component{
     }
 
   closeLightbox =()=> {
-    this.props.history.goBack()
+    this.setState({redirect: true})
   }
 
   redirectHomeOnClose = () =>{
@@ -62,7 +59,6 @@ class CompletedProjectsContainer extends React.Component{
   }
 
   render(){
-    console.log(this.props)
     return(
       <div>
         {this.redirectHomeOnClose()}
