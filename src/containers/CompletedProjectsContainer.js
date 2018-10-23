@@ -34,7 +34,7 @@ class CompletedProjectsContainer extends React.Component{
 
   }
   projectUsers = () =>{
-    return this.completedProjects().map(pro => pro.title) && this.completedProjects().map(pro => pro.users.map(user => `${user.username} Role: ${user.role} `))
+    return this.completedProjects().map(pro => pro.title) && this.completedProjects().map(pro => pro.users.map(user => `User: ${user.username}, Role: ${user.role} `))
   }
 
   openLightbox =() => {
@@ -42,7 +42,7 @@ class CompletedProjectsContainer extends React.Component{
     }
 
   closeLightbox =()=> {
-    this.setState({ redirect: true });
+    this.props.history.goBack()
   }
 
   redirectHomeOnClose = () =>{
@@ -62,6 +62,7 @@ class CompletedProjectsContainer extends React.Component{
   }
 
   render(){
+    console.log(this.props)
     return(
       <div>
         {this.redirectHomeOnClose()}

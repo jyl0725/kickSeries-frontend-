@@ -1,12 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {SET_CURRENT_USER, FAILED_SIGNUP} from '../reducers/types'
+import {SET_CURRENT_USER, FAILED_SIGNUP, CHANGE_SIGNUP_LOGIN} from '../reducers/types'
 import {Redirect} from 'react-router-dom'
-import { Button, Form, Dropdown } from 'semantic-ui-react'
+import { Button, Form, Dropdown, Message } from 'semantic-ui-react'
 import UserAdapter from '../adapters/userAdapter'
-import { Message } from 'semantic-ui-react'
-
-
 
 class SignUpForm extends React.Component{
   state = {
@@ -15,6 +12,10 @@ class SignUpForm extends React.Component{
     password: '',
     role: '',
     redirect: false,
+  }
+
+  componentDidMount(){
+    this.props.clearError()
   }
 
   handleChange = (event) =>{
@@ -86,7 +87,8 @@ const mapStateToProps = state => {
 const mapDispatchtoProps = (dispatch) =>{
   return{
     setCurrentUser: (currentUser) => dispatch({type: SET_CURRENT_USER, payload:currentUser}),
-    failedSignUp: (error) => dispatch({type: FAILED_SIGNUP, payload:error})
+    failedSignUp: (error) => dispatch({type: FAILED_SIGNUP, payload:error}),
+    clearError: () => dispatch({type:CHANGE_SIGNUP_LOGIN}),
   }
 }
 export default connect(mapStateToProps, mapDispatchtoProps)(SignUpForm)

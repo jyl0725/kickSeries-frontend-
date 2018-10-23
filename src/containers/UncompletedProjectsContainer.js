@@ -76,6 +76,8 @@ class UncompletedProjectsContainer extends React.Component{
 
 
   render(){
+    console.log(this.props.projects)
+    console.log(this.props.currentUser)
     return(
       <div>
         {this.redirectStoryTeller()}

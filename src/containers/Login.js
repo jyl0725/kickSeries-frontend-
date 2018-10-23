@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {SET_CURRENT_USER, FAILED_LOGIN} from '../reducers/types'
-import { Message } from 'semantic-ui-react'
+import {SET_CURRENT_USER, FAILED_LOGIN, CHANGE_SIGNUP_LOGIN} from '../reducers/types'
+import { Message ,Button, Form } from 'semantic-ui-react'
 
 class Login extends React.Component{
   state ={
@@ -11,13 +11,17 @@ class Login extends React.Component{
     redirect: false,
   }
 
+  componentDidMount(){
+    this.props.clearError()
+  }
+
   onChange = (event) =>{
     this.setState({ [event.target.name]: event.target.value})
   }
 
   handleSubmit = (event) =>{
     event.preventDefault();
-    fetch('http://localhost:4000/login', {
+    fetch('http://192.168.3.230:4000/login', {
      method: 'POST',
      headers: {
        'Content-Type': 'application/json',
@@ -48,16 +52,19 @@ class Login extends React.Component{
 
 
   render(){
+    console.log(this.props.error)
     return(
-      <form onSubmit={this.handleSubmit}>
-        {this.renderUserStartPage()}
+      <>
         {this.props.error && <Message error header={this.props.error} />}
-        <label>UserName</label>
-        <input name='username' type='text' value={this.state.username} onChange={this.onChange} />
-        <label>Password</label>
-        <input name="password" type="password" value={this.state.password} onChange={this.onChange} />
-        <input type="submit" value="submit" />
-      </form>
+        <Form onSubmit={this.handleSubmit}>
+          {this.renderUserStartPage()}
+          <label>UserName</label>
+          <Form.Input name='username' type='text' value={this.state.username} onChange={this.onChange} width={2} />
+          <label>Password</label>
+          <Form.Input name="password" type="password" value={this.state.password} onChange={this.onChange} width={2}/>
+          <Button type='submit'>Submit</Button>
+        </Form>
+      </>
     )
   }
 }
@@ -70,8 +77,10 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = dispatch =>{
   return{
     setCurrentUser: (data) => dispatch({type:SET_CURRENT_USER, payload: data}),
-    failedSetUser: (data) => dispatch({type:FAILED_LOGIN, payload:data})
+    failedSetUser: (data) => dispatch({type:FAILED_LOGIN, payload:data}),
+    clearError: () => dispatch({type:CHANGE_SIGNUP_LOGIN}),
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

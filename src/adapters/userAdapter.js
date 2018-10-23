@@ -1,4 +1,4 @@
-const api = 'http://localhost:4000/users/'
+const api = 'http://192.168.3.230:4000/users/'
 
 class UserAdapater{
 
@@ -13,6 +13,7 @@ class UserAdapater{
     })
     .then(res => {
       if(res.ok){
+        console.log(res);
         return res.json()
       }else{
         throw res

@@ -2,7 +2,7 @@ import React from 'react';
 import {SketchField, Tools} from 'react-sketch';
 import {connect} from 'react-redux';
 import '../App.css';
-import {FIND_PROJECT} from '../reducers/types'
+import {FIND_PROJECT, SAVE_DRAWING} from '../reducers/types'
 import ProjectAdapter from '../adapters/projectAdapter'
 
 
@@ -71,5 +71,7 @@ const mapStatetoProps = state =>{
     currentUser: state.user.currentUser,
   }
 }
+
+
 
 export default connect(mapStatetoProps)(SingleArtistProject)

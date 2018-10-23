@@ -2,15 +2,20 @@ import React from 'react'
 import {Tools} from 'react-sketch';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom'
-import {SET_NEW_PROJECT, SHOW_PROJECTS, ADD_PROJECT_TO_PROJECTS, FIND_USER_PROJECTS, PROJECT_TITLE_TAKEN} from '../reducers/types'
+import {SET_NEW_PROJECT, SHOW_PROJECTS, ADD_PROJECT_TO_PROJECTS, FIND_USER_PROJECTS, PROJECT_TITLE_TAKEN, CLEAR_ERROR} from '../reducers/types'
 import ProjectAdapter from '../adapters/projectAdapter'
-import { Message } from 'semantic-ui-react'
+import { Form, Message, Header,Button, TextArea } from 'semantic-ui-react'
+import sneakerButton from '../assets/sneakers.png'
 
 class StoryTellerProjectForm extends React.Component{
 
   state = {
     title: '',
     story: '',
+  }
+
+  componentDidMount(){
+    this.props.clearError()
   }
 
   handleChange = (event) =>{
@@ -22,12 +27,14 @@ class StoryTellerProjectForm extends React.Component{
   handleSubmit = (event) =>{
     event.preventDefault();
     ProjectAdapter.postProject(this.state.title, this.state.story)
-    .then(data => this.fetchCurretProject())
+    .then(data => {
+      this.fetchCurretProject()
+    })
     .catch(res => res.json().then(e => this.props.projectTitleError(e.error)))
   }
 
   fetchCurretProject = () =>{
-    fetch('http://localhost:4000/projects/')
+    fetch('http://192.168.3.230:4000/projects/')
     .then(res => res.json())
     .then(project => {
       const newProject = project.find(project => project.title === this.state.title);
@@ -35,7 +42,7 @@ class StoryTellerProjectForm extends React.Component{
       this.props.setNewProject(newProject)
     })
     .then(() =>{
-      fetch('http://localhost:4000/project_users',{
+      fetch('http://192.168.3.230:4000/project_users',{
         method: "POST",
         headers:{
           'Accept': 'application/json',
@@ -56,26 +63,27 @@ class StoryTellerProjectForm extends React.Component{
   }
 
   render(){
-    console.log(this.props.error)
     return (
       (this.props.currentUser && this.props.currentUser.role === 'story teller') ?
       <div>
           {this.props.error && <Message error header={this.props.error} />}
-        <h1> Create your own Story </h1>
-        <form onSubmit={this.handleSubmit}>
+        <Header as='h1' textAlign='center'> Create your Story </Header>
+        <div  className="ui one column stackable center aligned page grid">
+        <Form onSubmit={this.handleSubmit}>
           <label>
             Title:
           </label>
-          <input type= 'text' name='title' value={this.state.title} onChange ={this.handleChange}/>
+          <Form.Input type= 'text' name='title' value={this.state.title} onChange ={this.handleChange} width={16} />
           <br />
-          <textarea  name='story' value={this.state.story} onChange={this.handleChange} style={{height:'100px', width:'450px'}}/>
-          <input type='submit' value ='submit' />
-        </form>
+          <TextArea placeholder='Write a description/inspiration for your sneaker design'  name='story' value={this.state.story} onChange={this.handleChange} style={{height:'100px', width:'450px'}} width={5}/>
+          <br />
+          <img src={sneakerButton} alt='snkr-button' height="42" width="42" onClick={this.handleSubmit} />
+        </Form>
+        </div>
       </div> :
       <div> Help some one complete their story</div>
     )
   }
-
 }
 
 const mapDispatchtoProps =(dispatch) =>{
@@ -85,6 +93,7 @@ const mapDispatchtoProps =(dispatch) =>{
     addProjectToProjects: (project) => dispatch({type: ADD_PROJECT_TO_PROJECTS, payload:project}),
     findUserProjects: (data) => dispatch({type:FIND_USER_PROJECTS, payload: data }),
     projectTitleError: (error) =>dispatch({type:PROJECT_TITLE_TAKEN, payload:error}),
+    clearError: ()=> dispatch({type:CLEAR_ERROR})
   }
 }
 const mapStatetoProps = (state) =>{

@@ -2,19 +2,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Menu, Segment } from 'semantic-ui-react'
+import {TransitionGroup, CSSTransition} from 'react-transition-group'
 
 
 class NavBar extends React.Component{
 
-  state = {
-    activeItem: '',
-  }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render(){
-      console.log(this.props.currentUser)
-       const { activeItem } = this.state
     return (
       <Segment inverted>
         <Menu inverted secondary>
@@ -28,12 +22,13 @@ class NavBar extends React.Component{
          <Menu.Item  as={NavLink} exact to='/userprojectdisplay' content='All Your Project' />
          <Menu.Item  as={NavLink} exact to='/uncompletedprojects' content='Work on a Project' />
          <Menu.Menu position='right'>
+           <div className='user-name'>Hi {this.props.currentUser.name}</div>
          <Menu.Item  as={NavLink} exact to='/logout' content='Log Out' />
          </Menu.Menu>
         </> :
         <Menu.Menu position='right'>
-          <Menu.Item  as={NavLink} exact to='/login' content='Login' />
-          <Menu.Item  as={NavLink} exact to='/signUp' content='Sign Up' />
+          <Menu.Item  as={NavLink} exact to='/login' content='Login'/>
+          <Menu.Item  as={NavLink} exact to='/signUp' content='Sign Up'/>
         </Menu.Menu>
       }
         </Menu>
@@ -46,8 +41,11 @@ class NavBar extends React.Component{
 const mapStatetoProps = (state) =>{
   return {
     currentUser: state.user.currentUser,
+    error: state.user.error,
   }
 }
+
+
 
 
 

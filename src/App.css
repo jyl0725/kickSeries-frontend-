@@ -1,14 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
 #navbartitle {
   color: White;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Lobster', cursive;
   font-size: 30pt;
   padding-top: 12px
 }
 
-
-.app {
-  background-color: black;
-}
 
 body {
   background-color: black !important;
@@ -16,4 +14,31 @@ body {
 
 label {
   color: white !important;
+}
+
+.user-name {
+  padding-top: 13px;
+}
+
+h1{
+  color: white !important;
+}
+
+.canvas-container{
+  background-color: white !important;
+}
+
+
+.ReactModal__Body--open {
+  background-color: white !important;
+}
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in; 
 }
