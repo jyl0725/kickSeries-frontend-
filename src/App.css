@@ -38,7 +38,7 @@ h3{
 }
 
 .circle-picker {
-  
+
 }
 
 .fade-enter {
@@ -48,5 +48,20 @@ h3{
 
 .fade-enter.fade-enter-active {
   opacity: 1;
-  transition: opacity 250ms ease-in;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+.cards{
+  display: flex;
+  justify-content: center;
+  position: relative;
 }

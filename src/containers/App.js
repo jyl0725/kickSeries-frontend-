@@ -42,19 +42,19 @@ class App extends Component {
       <Router>
           <React.Fragment>
           <NavBar/>
-            <Switch >
-              <Route exact path="/" render={Home}/>
-              <Route exact path="/editproject" component={EditProject} />
-              <Route exact path="/completedprojects" component={CompletedProjectsContainer}/>
-              <Route exact path="/uncompletedprojects" component={UncompletedProjectsContainer}/>
-              <Route exact path="/SignUp" component={SignUpForm}/>
-              <Route exact path="/newprojectform" component={NewPojectForm}/>
-              <Route exact path="/userprojectdisplay" component={UserProjectDisplay} />
-              <Route exact path="/singleartistproject" component={SingleArtistProject} />
-              <Route exact path="/singledesignerproject" component={SingleDesignerProject} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/logout" component={LogOut} />
-            </Switch>
+              <Switch>
+                <Route exact path="/" render={Home}/>
+                <Route exact path="/editproject" component={EditProject} />
+                <Route exact path="/completedprojects" component={CompletedProjectsContainer}/>
+                <Route exact path="/uncompletedprojects" component={UncompletedProjectsContainer}/>
+                <Route exact path="/SignUp" component={SignUpForm}/>
+                <Route exact path="/newprojectform" component={NewPojectForm}/>
+                <Route exact path="/userprojectdisplay" component={UserProjectDisplay} />
+                <Route exact path="/singleartistproject" component={SingleArtistProject} />
+                <Route exact path="/singledesignerproject" component={SingleDesignerProject} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/logout" component={LogOut} />
+              </Switch>
           </React.Fragment>
       </Router>
     );

@@ -10,7 +10,6 @@ const userReducer = (state = initialState, action) =>{
     case SET_NEW_USER:
       return{...state,  currentUser:action.payload}
     case SET_CURRENT_USER:
-      console.log(action)
       return {...state, currentUser:action.payload}
     case FIND_USER_PROJECTS:
       return {...state, currentUser:action.payload}

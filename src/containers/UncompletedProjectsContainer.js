@@ -20,8 +20,7 @@ class UncompletedProjectsContainer extends React.Component{
   }
 
   handleClick =(event) =>{
-    console.log(event.target)
-    const project = this.props.projects.find(p => p.title.split(' ').join('')  === event.target.innerText.split(' ').join('') || p.story === event.target.innerText || p.image_url === event.target.src)
+    const project = this.props.projects.find(proj => proj.id === event.target.parentNode.id || proj.image_url === event.target.src || proj.title.split(' ').join('')  === event.target.innerText.split(' ').join('') || proj.story.split(' ').join('')  === event.target.innerText.split(' ').join(''))
     this.props.findProject(project)
     if(this.props.currentUser.role === 'artist'){
       this.setState({redirectArtist :true})
@@ -49,7 +48,7 @@ class UncompletedProjectsContainer extends React.Component{
       return this.props.projects.filter(project =>{
         return project.users.length === 1
       }).map(pro =>{
-        return <Card onClick={this.handleClick} key={pro.id} header={pro.title} description={pro.story} />
+        return <Card id={pro.id} onClick={this.handleClick} key={pro.id} header={pro.title} description={pro.story} />
       })
     }
   }
@@ -78,13 +77,13 @@ class UncompletedProjectsContainer extends React.Component{
 
   render(){
     return(
-      <div>
+      <Card.Group>
         {this.redirectStoryTeller()}
         {this.renderArtist()}
         {this.redirectArtist()}
         {this.renderDesigner()}
         {this.redirectDesigner()}
-      </div>
+      </Card.Group>
     )
   }
 }

@@ -55,8 +55,8 @@ class SingleDesignerProject extends React.Component{
         <CirclePicker color={this.state.color} onChangeComplete={this.handleColorChange} />
         <SketchField id='canvas'
                      ref={(c) => this._sketch = c}
-                     width='700px'
-                     height='500px'
+                     width='750px'
+                     height='550px'
                      tool={this.state.tool}
                      lineColor ={this.state.color}
                      onChange={this.handleSave}

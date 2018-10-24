@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {SET_CURRENT_USER, FAILED_SIGNUP, CHANGE_SIGNUP_LOGIN} from '../reducers/types'
 import {Redirect} from 'react-router-dom'
-import { Button, Form, Dropdown, Message } from 'semantic-ui-react'
+import { Button, Form, Dropdown, Message, Popup } from 'semantic-ui-react'
 import UserAdapter from '../adapters/userAdapter'
 import exist from '../hocs/exist'
 
@@ -70,9 +70,11 @@ class SignUpForm extends React.Component{
           <label>Enter Password</label>
           <Form.Input type="password" name="password" value={this.state.password} onChange={this.handleChange} width={2}/>
         </Form.Field>
-      <Dropdown placeholder='Role' compact selection options={options} onChange={this.handleSelectionChange} />
+        <Popup trigger={<Dropdown placeholder='Role' compact selection options={options} onChange={this.handleSelectionChange} />}
+               content={'A story teller writes the story.  |  An artist draws the blueprint. |  A designer colors the blueprint'} />
         <Button type='submit'>Submit</Button>
     </Form>
+
     </>
     )
   }
