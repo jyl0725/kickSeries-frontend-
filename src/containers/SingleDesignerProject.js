@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Tools, SketchField} from 'react-sketch';
 import {CirclePicker} from 'react-color'
 import ProjectAdapter from '../adapters/projectAdapter'
-import exist from '../hocs/exist'
+import directTo from '../hocs/directTo'
 
 
 class SingleDesignerProject extends React.Component{
@@ -49,8 +49,8 @@ class SingleDesignerProject extends React.Component{
   render(){
     return(
       <div>
-        <div>{this.props.project.title}</div>
-        <div>{this.props.project.story}</div>
+        <h1>{this.props.project.title}</h1>
+        <h3>{this.props.project.story}</h3>
         <div> Pick a Color</div>
         <CirclePicker color={this.state.color} onChangeComplete={this.handleColorChange} />
         <SketchField id='canvas'
@@ -76,4 +76,4 @@ const mapStatetoProps = state =>{
   }
 }
 
-export default connect(mapStatetoProps)(SingleDesignerProject)
+export default directTo(connect(mapStatetoProps)(SingleDesignerProject))

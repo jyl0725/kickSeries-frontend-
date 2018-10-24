@@ -24,8 +24,10 @@ const exist = (WrappedComponent) =>{
     render(){
       if(this.props.currentUser){
          return <WrappedComponent />
+      // }else if(!this.props.currentProject){
+      //     return <
       }else{
-        return <div></div>
+        return null
       }
     }
   }

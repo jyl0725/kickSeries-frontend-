@@ -52,7 +52,6 @@ class SignUpForm extends React.Component{
   }
 
   render(){
-    console.log(this.props.error)
     const options = [{ key: 1, text: 'story teller', name: 'story teller', value: 'story teller' }, { key: 2, text: 'artist', name: 'artist', value: 'artist' }, { key: 3, text: 'designer', name: 'designer', value: 'designer' }]
     return (
       <>
@@ -92,4 +91,4 @@ const mapDispatchtoProps = (dispatch) =>{
     clearError: () => dispatch({type:CHANGE_SIGNUP_LOGIN}),
   }
 }
-export default exist(connect(mapStateToProps, mapDispatchtoProps)(SignUpForm))
+export default connect(mapStateToProps, mapDispatchtoProps)(SignUpForm)

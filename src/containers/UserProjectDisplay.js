@@ -5,6 +5,7 @@ import {ActionCable} from 'react-actioncable-provider'
 import UserAdapter from '../adapters/userAdapter'
 import {Card} from 'semantic-ui-react'
 import exist from '../hocs/exist'
+import {Redirect} from 'react-router-dom'
 
 class UserProjectDisplay extends React.Component{
 

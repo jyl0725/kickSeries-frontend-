@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom'
 import {FIND_PROJECT, SHOW_PROJECTS} from '../reducers/types'
 import ProjectAdapter from '../adapters/projectAdapter'
 import ProjectUserAdapter from '../adapters/projectUserAdapter'
+import {Card} from 'semantic-ui-react'
 import exist from '../hocs/exist'
 
 class UncompletedProjectsContainer extends React.Component{
@@ -19,7 +20,7 @@ class UncompletedProjectsContainer extends React.Component{
   }
 
   handleClick =(event) =>{
-    const project = this.props.projects.find(p => p.title.split(' ').join('')  === event.target.innerText.split(' ').join(''))
+    const project = this.props.projects.find(p => p.title.split(' ').join('')  === event.target.innerText.split(' ').join('') || p.story === event.target.innerText)
     this.props.findProject(project)
     if(this.props.currentUser.role === 'artist'){
       this.setState({redirectArtist :true})
@@ -47,7 +48,7 @@ class UncompletedProjectsContainer extends React.Component{
       return this.props.projects.filter(project =>{
         return project.users.length === 1
       }).map(pro =>{
-        return <div onClick={this.handleClick} key={pro.id}>{pro.title}</div>
+        return <Card onClick={this.handleClick} key={pro.id} header={pro.title} description={pro.story} />
       })
     }
   }
@@ -57,14 +58,14 @@ class UncompletedProjectsContainer extends React.Component{
       return this.props.projects.filter(project =>{
         return project.users.length === 2
           }).map(pro =>{
-          return <div onClick={this.handleClick} key={pro.id}>{pro.title}</div>
+          return <Card onClick={this.handleClick} key={pro.id} header={pro.title} description={pro.story} />
       })
     }
   }
 
   redirectArtist(){
     if(this.state.redirectArtist){
-      return <Redirect to='/singlearistproject' />
+      return <Redirect to='/singleartistproject' />
     }
   }
 
@@ -74,11 +75,7 @@ class UncompletedProjectsContainer extends React.Component{
     }
   }
 
-
-
   render(){
-    console.log(this.props.projects)
-    console.log(this.props.currentUser)
     return(
       <div>
         {this.redirectStoryTeller()}

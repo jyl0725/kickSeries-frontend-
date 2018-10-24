@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import '../App.css';
 import {FIND_PROJECT, SAVE_DRAWING} from '../reducers/types'
 import ProjectAdapter from '../adapters/projectAdapter'
-import exist from '../hocs/exist'
+import directTo from '../hocs/directTo'
 
 
 class SingleArtistProject extends React.Component{
@@ -43,8 +43,8 @@ class SingleArtistProject extends React.Component{
   render(){
     return (
       <div>
-        <div>{this.props.project.title}</div>
-        <div>{this.props.project.story}</div>
+        <h1>{this.props.project.title}</h1>
+        <h3>{this.props.project.story}</h3>
         <SketchField id='canvas'
                      ref={(c) => this._sketch = c}
                      width='700px'
@@ -75,4 +75,4 @@ const mapStatetoProps = state =>{
 
 
 
-export default exist(connect(mapStatetoProps)(SingleArtistProject))
+export default directTo(connect(mapStatetoProps)(SingleArtistProject))
