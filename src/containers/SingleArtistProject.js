@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import '../App.css';
 import {FIND_PROJECT, SAVE_DRAWING} from '../reducers/types'
 import ProjectAdapter from '../adapters/projectAdapter'
+import { Dropdown, Menu } from 'semantic-ui-react'
 import directTo from '../hocs/directTo'
 
 
@@ -14,6 +15,7 @@ class SingleArtistProject extends React.Component{
   }
 
   handleSelect = (event) =>{
+    console.log(event.target)
     this.setState({
       tool: event.target.value,
     })
@@ -41,6 +43,12 @@ class SingleArtistProject extends React.Component{
   }
 
   render(){
+    const options =
+    [{ key: 1, text: 'Pencil', name: 'Pencil', value: Tools.Pencil },
+    { key: 2, text: 'Line', name: 'Line', value: Tools.Line },
+    { key: 3, text: 'Rectangle', name: 'Rectangle', value: Tools.Rectangle },
+    { key: 3, text: 'Circle', name: 'Circle', value: Tools.Circle },
+    { key: 3, text: 'Pan', name: 'Pan', value: Tools.Pan }]
     return (
       <div>
         <h1>{this.props.project.title}</h1>
@@ -53,6 +61,9 @@ class SingleArtistProject extends React.Component{
                      onChange={this.handleSave}
                      lineColor ='black'
                      lineWidth={3} />
+        <Menu compact>
+        <Dropdown text='Dropdown' options={options} simple item onChange={this.handleSelect} />
+        </Menu>
        <select value={this.state.tool} onChange={this.handleSelect}>
          <option value={Tools.Pencil}> Pencil</option>
          <option value={Tools.Line}> Line</option>

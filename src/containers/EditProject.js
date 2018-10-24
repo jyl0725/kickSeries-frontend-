@@ -4,6 +4,7 @@ import {Tools, SketchField} from 'react-sketch';
 import {CirclePicker} from 'react-color'
 import ProjectAdapter from '../adapters/projectAdapter'
 import directTo from '../hocs/directTo'
+import { Dropdown, Menu } from 'semantic-ui-react'
 
 
 class EditProject extends React.Component{
@@ -15,8 +16,15 @@ class EditProject extends React.Component{
     canUndo: false,
   }
 
+  handleSelect = (event) =>{
+    console.log(event.target.value)
+    this.setState({
+      tool: event.target.value,
+    })
+  }
+
   handleColorChange = (color) =>{
-    this.setState({color: color.hex}, this._sketch.addImg(this.props.project.image_url))
+    this.setState({color: color.hex})
   }
 
   handleLineChange = (event) =>{
@@ -46,10 +54,18 @@ class EditProject extends React.Component{
   }
 
   handleStartEdit = () =>{
-    this._sketch.addImg(this.props.project.image_url)
+    this._sketch.setBackgroundFromDataUrl(this.props.project.image_url)
   }
 
   renderArtistOrDesignerCanvas = () => {
+
+    const artistOptions =
+    [{ key: 1, text: 'Pencil',  value: Tools.Pencil },
+    { key: 2, text: 'Line',  value: Tools.Line },
+    { key: 3, text: 'Rectangle', value: Tools.Rectangle },
+    { key: 4, text: 'Circle',  value: Tools.Circle },
+    { key: 5, text: 'Pan',  value: Tools.Pan }]
+
     if(this.props.currentUser.role === 'story teller'){
       return <h1>Stories are forever </h1>
     }else if(this.props.currentUser.role === 'artist'){
@@ -65,6 +81,9 @@ class EditProject extends React.Component{
                      onChange={this.handleSave}
                      lineColor ='black'
                      lineWidth={3} />
+       <Menu compact>
+         <Dropdown text='Dropdown' options={artistOptions} simple item onChange={this.handleSelect} />
+       </Menu>
        <select value={this.state.tool} onChange={this.handleSelect}>
          <option value={Tools.Pencil}> Pencil</option>
          <option value={Tools.Line}> Line</option>
@@ -84,7 +103,7 @@ class EditProject extends React.Component{
         <SketchField id='canvas'
                      ref={(c) => this._sketch = c}
                      width='700px'
-                     height='500px'
+                     height='450px'
                      tool={this.state.tool}
                      lineColor ={this.state.color}
                      onChange={this.handleSave}
@@ -96,6 +115,8 @@ class EditProject extends React.Component{
     }
   }
   render(){
+
+
     return(
       this.renderArtistOrDesignerCanvas()
     )
@@ -109,9 +130,4 @@ const mapStateToProps = state =>{
   }
 }
 
-// const mapDispatchToProps = dispatch =>{
-//   return{
-//
-//   }
-// }
 export default directTo(connect(mapStateToProps)(EditProject))

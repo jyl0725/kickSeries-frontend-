@@ -15,7 +15,7 @@ class SingleDesignerProject extends React.Component{
   }
 
   handleColorChange = (color) =>{
-    this.setState({color: color.hex}, this._sketch.addImg(this.props.project.image_url))
+    this.setState({color: color.hex}, this._sketch.setBackgroundFromDataUrl(this.props.project.image_url))
   }
 
   handleLineChange = (event) =>{
