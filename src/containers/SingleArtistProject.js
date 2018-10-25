@@ -66,6 +66,7 @@ class SingleArtistProject extends React.Component{
                      onChange={this.handleSave}
                      lineColor ='black'
                      lineWidth={3} />
+        <SignalServer />
       </div>
     )
   }
