@@ -4,7 +4,7 @@ import {Tools, SketchField} from 'react-sketch';
 import {CirclePicker} from 'react-color'
 import ProjectAdapter from '../adapters/projectAdapter'
 import directTo from '../hocs/directTo'
-import { Dropdown, Menu } from 'semantic-ui-react'
+import { Dropdown, Menu, Button } from 'semantic-ui-react'
 
 
 class EditProject extends React.Component{
@@ -14,12 +14,17 @@ class EditProject extends React.Component{
     color: 'white',
     lineWidth: 3,
     canUndo: false,
+    stretched: true,
+    stretchedX: false,
+    stretchedY: false,
+    originX: 'left',
+    originY: 'top'
   }
 
-  handleSelect = (event) =>{
-    console.log(event.target.value)
+  handleSelect = (event, data) =>{
+    console.log(data)
     this.setState({
-      tool: event.target.value,
+      tool: data.value
     })
   }
 
@@ -54,7 +59,15 @@ class EditProject extends React.Component{
   }
 
   handleStartEdit = () =>{
-    this._sketch.setBackgroundFromDataUrl(this.props.project.image_url)
+    let sketch = this._sketch;
+    let {stretched, stretchedX, stretchedY, originX, originY} = this.state;
+    sketch.setBackgroundFromDataUrl(this.props.project.image_url, {
+                stretched: stretched,
+                stretchedX: stretchedX,
+                stretchedY: stretchedY,
+                originX: originX,
+                originY: originY
+            });
   }
 
   renderArtistOrDesignerCanvas = () => {
@@ -67,12 +80,16 @@ class EditProject extends React.Component{
     { key: 5, text: 'Pan',  value: Tools.Pan }]
 
     if(this.props.currentUser.role === 'story teller'){
-      return <h1>Stories are forever </h1>
+      return <h1 className='canvas-page'>Stories are forever </h1>
     }else if(this.props.currentUser.role === 'artist'){
-      return <div>
+      return <div className='canvas-page'>
         <h1>{this.props.project.title}</h1>
         <h3>{this.props.project.story}</h3>
-        <button onClick={this.handleStartEdit}> Edit Project</button>
+        <Button inverted onClick={this.handleStartEdit}> Edit Project</Button>
+        {this.state.canUndo && <Button inverted onClick={this.undo}> Undo</Button>}
+        <Menu compact>
+          <Dropdown text='Dropdown' options={artistOptions} simple item onChange={this.handleSelect} />
+        </Menu>
         <SketchField id='canvas'
                      ref={(c) => this._sketch = c}
                      width='700px'
@@ -81,25 +98,17 @@ class EditProject extends React.Component{
                      onChange={this.handleSave}
                      lineColor ='black'
                      lineWidth={3} />
-       <Menu compact>
-         <Dropdown text='Dropdown' options={artistOptions} simple item onChange={this.handleSelect} />
-       </Menu>
-       <select value={this.state.tool} onChange={this.handleSelect}>
-         <option value={Tools.Pencil}> Pencil</option>
-         <option value={Tools.Line}> Line</option>
-         <option value={Tools.Pan}> Pan</option>
-         <option value={Tools.Circle}> Circle</option>
-       </select>
-
-       {this.state.canUndo && <button onClick={this.undo}> Undo</button>}
       </div>
     }else{
-      return <div>
+      return <div className='canvas-page'>
         <h1>{this.props.project.title}</h1>
         <h3>{this.props.project.story}</h3>
-        <button onClick={this.handleStartEdit}> Edit Project</button>
-        <div> Pick a Color</div>
+        <h3> Pick a color to start</h3>
         <CirclePicker color={this.state.color} onChangeComplete={this.handleColorChange} />
+        <Button onClick={this.handleStartEdit}> Edit Project</Button>
+        {this.state.canUndo && <Button onClick={this.undo}> Undo</Button>}
+        <label> Edit Line Width </label>
+        <input type='number' value={this.state.lineWidth} onChange={this.handleLineChange}/>
         <SketchField id='canvas'
                      ref={(c) => this._sketch = c}
                      width='700px'
@@ -108,9 +117,6 @@ class EditProject extends React.Component{
                      lineColor ={this.state.color}
                      onChange={this.handleSave}
                      lineWidth={this.state.lineWidth}/>
-                   <label> Edit LineWidth </label>
-        <input type='number' value={this.state.lineWidth} onChange={this.handleLineChange}/>
-        {this.state.canUndo && <button onClick={this.undo}> Undo</button>}
     </div>
     }
   }

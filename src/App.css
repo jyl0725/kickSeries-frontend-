@@ -22,10 +22,12 @@ label {
 
 h1{
   color: white ;
+  padding-left: 30%;
 }
 
 h3{
   color: white !important;
+  padding-left: 10px;
 }
 
 .canvas-container{
@@ -61,6 +63,16 @@ h3{
 }
 
 .cards{
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.edit-page{
+  padding-left: 35%;
+}
+
+.start-page{
   display: flex;
   justify-content: center;
   position: relative;

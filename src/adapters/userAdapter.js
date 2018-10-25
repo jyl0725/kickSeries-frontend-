@@ -1,4 +1,4 @@
-const api = 'http://192.168.3.230:4000/users/'
+const api = 'http://localhost:4000/users/'
 
 class UserAdapater{
 

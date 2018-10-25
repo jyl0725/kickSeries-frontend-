@@ -35,7 +35,7 @@ class StoryTellerProjectForm extends React.Component{
   }
 
   fetchCurretProject = () =>{
-    fetch('http://192.168.3.230:4000/projects/')
+    fetch('http://localhost:4000/projects/')
     .then(res => res.json())
     .then(project => {
       const newProject = project.find(project => project.title === this.state.title);
@@ -43,7 +43,7 @@ class StoryTellerProjectForm extends React.Component{
       this.props.setNewProject(newProject)
     })
     .then(() =>{
-      fetch('http://192.168.3.230:4000/project_users',{
+      fetch('http://localhost:4000/project_users',{
         method: "POST",
         headers:{
           'Accept': 'application/json',
@@ -82,7 +82,10 @@ class StoryTellerProjectForm extends React.Component{
         </Form>
         </div>
       </div> :
-      <div> Help some one complete their story</div>
+      <div className='start-page'>
+          <h1> Help some one complete their story</h1>
+      </div>
+
     )
   }
 }

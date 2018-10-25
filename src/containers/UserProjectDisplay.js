@@ -18,7 +18,6 @@ class UserProjectDisplay extends React.Component{
   }
 
   handleClick = event =>{
-    console.log(event.target)
     const project = this.props.currentUser.projects.find(proj => proj.image_url === event.target.src || proj.title.split(' ').join('')  === event.target.innerText.split(' ').join('') || proj.story.split(' ').join('')  === event.target.innerText.split(' ').join(''))
     this.props.findProject(project)
     this.setState({redirect: true})
