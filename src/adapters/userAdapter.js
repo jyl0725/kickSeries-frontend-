@@ -1,4 +1,4 @@
-const api = 'http://localhost:4000/users/'
+const api = 'https://kickseries-app-api.herokuapp.com/users/'
 
 class UserAdapater{
 

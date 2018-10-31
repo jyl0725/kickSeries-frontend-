@@ -1,6 +1,5 @@
-const api = 'http://localhost:4000/projects/'
+const api = 'https://kickseries-app-api.herokuapp.com/projects/'
 
-// 192.168.3.230
 
 class ProjectAdapter {
 

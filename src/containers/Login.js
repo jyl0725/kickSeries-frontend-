@@ -22,7 +22,7 @@ class Login extends React.Component{
 
   handleSubmit = (event) =>{
     event.preventDefault();
-    fetch('http://192.168.3.230:4000/login', {
+    fetch('https://kickseries-app-api.herokuapp.com/login', {
      method: 'POST',
      headers: {
        'Content-Type': 'application/json',

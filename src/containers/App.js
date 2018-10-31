@@ -24,11 +24,11 @@ class App extends Component {
 
 
   componentDidMount(){
-    fetch('http://localhost:4000/projects')
+    fetch('https://kickseries-app-api.herokuapp.com/projects')
     .then(res => res.json())
     .then(projectsData => this.props.showProject(projectsData))
 
-    fetch('http://localhost:4000/profile',{
+    fetch('https://kickseries-app-api.herokuapp.com/profile',{
       headers: {
          Authorization: `Bearer ${localStorage.getItem('jwt')}`,
       },

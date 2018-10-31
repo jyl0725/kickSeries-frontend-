@@ -1,4 +1,4 @@
-const api = 'http://localhost:4000/project_users/'
+const api = 'https://kickseries-app-api.herokuapp.com/project_users/'
 
 class ProjectUserAdapter {
 

@@ -35,7 +35,7 @@ class StoryTellerProjectForm extends React.Component{
   }
 
   fetchCurretProject = () =>{
-    fetch('http://localhost:4000/projects/')
+    fetch('https://kickseries-app-api.herokuapp.com/projects/')
     .then(res => res.json())
     .then(project => {
       const newProject = project.find(project => project.title === this.state.title);
@@ -43,7 +43,7 @@ class StoryTellerProjectForm extends React.Component{
       this.props.setNewProject(newProject)
     })
     .then(() =>{
-      fetch('http://localhost:4000/project_users',{
+      fetch('https://kickseries-app-api.herokuapp.com/project_users',{
         method: "POST",
         headers:{
           'Accept': 'application/json',
