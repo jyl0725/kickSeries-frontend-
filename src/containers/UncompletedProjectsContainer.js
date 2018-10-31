@@ -20,7 +20,7 @@ class UncompletedProjectsContainer extends React.Component{
   }
 
   handleClick =(event) =>{
-    const project = this.props.projects.find(proj => proj.id === event.target.parentNode.id || proj.image_url === event.target.src || proj.title.split(' ').join('')  === event.target.innerText.split(' ').join('') || proj.story.split(' ').join('')  === event.target.innerText.split(' ').join(''))
+    const project = this.props.projects.find(proj => proj.id === parseInt(event.target.parentNode.id) || proj.image_url === event.target.src || proj.title.split(' ').join('')  === event.target.innerText.split(' ').join('') || proj.story.split(' ').join('')  === event.target.innerText.split(' ').join(''))
     this.props.findProject(project)
     if(this.props.currentUser.role === 'artist'){
       this.setState({redirectArtist :true})
@@ -58,7 +58,7 @@ class UncompletedProjectsContainer extends React.Component{
       return this.props.projects.filter(project =>{
         return project.users.length === 2
           }).map(pro =>{
-          return <Card onClick={this.handleClick} key={pro.id} header={pro.title} description={pro.story} image={pro.image_url}/>
+          return <Card id={pro.id} onClick={this.handleClick} key={pro.id} header={pro.title} description={pro.story} image={pro.image_url}/>
       })
     }
   }

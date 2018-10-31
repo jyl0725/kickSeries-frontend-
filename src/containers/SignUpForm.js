@@ -54,28 +54,29 @@ class SignUpForm extends React.Component{
   render(){
     const options = [{ key: 1, text: 'story teller', name: 'story teller', value: 'story teller' }, { key: 2, text: 'artist', name: 'artist', value: 'artist' }, { key: 3, text: 'designer', name: 'designer', value: 'designer' }]
     return (
-      <>
+      <div>
       {this.props.error && <Message error header={this.renderErrors()} />}
-      <Form onSubmit={this.createAndSetCurrentUser}>
-        {this.renderUserStartPage()}
-        <Form.Field>
-          <label>Name</label>
-          <Form.Input type="text" name="name" value={this.state.name} onChange={this.handleChange} width={2}/>
-        </Form.Field>
-        <Form.Field>
-          <label>UserName</label>
-          <Form.Input type="text" name="username" value={this.state.username} onChange={this.handleChange} width={2}/>
-        </Form.Field>
-        <Form.Field>
-          <label>Enter Password</label>
-          <Form.Input type="password" name="password" value={this.state.password} onChange={this.handleChange} width={2}/>
-        </Form.Field>
-        <Popup trigger={<Dropdown placeholder='Role' compact selection options={options} onChange={this.handleSelectionChange} />}
-               content={'A story teller writes the story.  |  An artist draws the blueprint. |  A designer colors the blueprint'} />
-        <Button type='submit'>Submit</Button>
-    </Form>
-
-    </>
+        <div className="ui one column stackable center aligned page grid">
+          <Form onSubmit={this.createAndSetCurrentUser}>
+            {this.renderUserStartPage()}
+            <Form.Field>
+              <label>Name</label>
+              <Form.Input type="text" name="name" value={this.state.name} onChange={this.handleChange} width={15}/>
+            </Form.Field>
+            <Form.Field>
+              <label>UserName</label>
+              <Form.Input type="text" name="username" value={this.state.username} onChange={this.handleChange} width={15}/>
+            </Form.Field>
+            <Form.Field>
+              <label>Enter Password</label>
+              <Form.Input type="password" name="password" value={this.state.password} onChange={this.handleChange} width={15}/>
+            </Form.Field>
+            <Popup trigger={<Dropdown placeholder='Role' compact selection options={options} onChange={this.handleSelectionChange} />}
+                   content={'A story teller writes the story.  |  An artist draws the blueprint. |  A designer colors the blueprint'} />
+            <Button type='submit'>Submit</Button>
+          </Form>
+        </div>
+      </div>
     )
   }
 }

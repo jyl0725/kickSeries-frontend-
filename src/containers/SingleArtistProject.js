@@ -6,7 +6,8 @@ import {FIND_PROJECT, SAVE_DRAWING} from '../reducers/types'
 import ProjectAdapter from '../adapters/projectAdapter'
 import { Dropdown, Menu, Button } from 'semantic-ui-react'
 import directTo from '../hocs/directTo'
-import SignalServer from './SingleArtistProject'
+import SignalServer from './SignalServer'
+
 
 
 class SingleArtistProject extends React.Component{
@@ -51,22 +52,26 @@ class SingleArtistProject extends React.Component{
     { key: 4, text: 'Circle', name: 'Circle', value: Tools.Circle },
     { key: 5, text: 'Pan', name: 'Pan', value: Tools.Pan }]
     return (
-      <div className='canvas-page'>
-        <h1>{this.props.project.title}</h1>
-        <h3>{this.props.project.story}</h3>
-        {this.state.canUndo && <Button inverted onClick={this.undo}> Undo</Button>}
-        <Menu compact>
-          <Dropdown text='Dropdown' options={options} simple item onChange={this.handleSelect} />
-        </Menu>
-        <SketchField id='canvas'
-                     ref={(c) => this._sketch = c}
-                     width='700px'
-                     height='500px'
-                     tool={this.state.tool}
-                     onChange={this.handleSave}
-                     lineColor ='black'
-                     lineWidth={3} />
-        <SignalServer />
+
+          <div className="ui one column stackable center aligned page grid">
+            <div className='art-work-page'>
+                <h1>{this.props.project.title}</h1>
+                 <h3>{this.props.project.story}</h3>
+              {this.state.canUndo && <Button inverted onClick={this.undo}> Undo</Button>}
+              <Menu compact>
+                <Dropdown text='Dropdown' options={options} simple item onChange={this.handleSelect} />
+              </Menu>
+            </div>
+
+          <SketchField id='canvas'
+                       ref={(c) => this._sketch = c}
+                       width='700px'
+                       height='500px'
+                       tool={this.state.tool}
+                       onChange={this.handleSave}
+                       lineColor ='black'
+                       lineWidth={3} />
+          <SignalServer />
       </div>
     )
   }

@@ -4,7 +4,7 @@ import {Tools, SketchField} from 'react-sketch';
 import {CirclePicker} from 'react-color'
 import ProjectAdapter from '../adapters/projectAdapter'
 import directTo from '../hocs/directTo'
-import { Button } from 'semantic-ui-react'
+import { Button, Popup, Input } from 'semantic-ui-react'
 
 
 class SingleDesignerProject extends React.Component{
@@ -64,14 +64,19 @@ class SingleDesignerProject extends React.Component{
 
   render(){
     return(
-      <div className='canvas-page'>
-        <h1>{this.props.project.title}</h1>
-        <h3>{this.props.project.story}</h3>
+      <div className="ui one column stackable center aligned page grid">
+            <div className='art-work-page'>
+          <h1>{this.props.project.title}</h1>
+           <h3>{this.props.project.story}</h3>
         <h3> Pick a color to start</h3>
         <CirclePicker color={this.state.color} onChangeComplete={this.handleColorChange} />
+        <div className='tools'>
+      <Button onClick={this.handleStartEdit}> Edit Project</Button>
         {this.state.canUndo && <Button onClick={this.undo}> Undo</Button>}
-        <label> Edit Line Width </label>
-        <input type='number' value={this.state.lineWidth} onChange={this.handleLineChange}/>
+        <Popup trigger ={<Input size='small' type='number' value={this.state.lineWidth} onChange={this.handleLineChange}/>}
+          content={"Edit Pencil Width"} width={3} />
+          </div>
+          </div>
         <SketchField id='canvas'
                      ref={(c) => this._sketch = c}
                      width='700px'

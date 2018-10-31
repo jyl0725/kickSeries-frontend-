@@ -30,7 +30,7 @@ class CompletedProjectsContainer extends React.Component{
     return this.completedProjects().map(pro => pro.story)
 
   }
-  projectUsers = () =>{
+  projectTitle = () =>{
     return this.completedProjects().map(pro => pro.title)
   }
 
@@ -69,7 +69,7 @@ class CompletedProjectsContainer extends React.Component{
           onCloseRequest={this.closeLightbox}
           onMovePrevRequest={this.movePrev}
           onMoveNextRequest={this.moveNext}
-          imageTitle={this.projectUsers()[this.state.index]}
+          imageTitle={this.projectTitle()[this.state.index]}
           imageCaption={this.projectStory()[this.state.index]}
         />
       </div>

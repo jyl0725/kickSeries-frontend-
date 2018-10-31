@@ -22,7 +22,7 @@ class Login extends React.Component{
 
   handleSubmit = (event) =>{
     event.preventDefault();
-    fetch('http://localhost:4000/login', {
+    fetch('http://192.168.3.230:4000/login', {
      method: 'POST',
      headers: {
        'Content-Type': 'application/json',
@@ -55,17 +55,19 @@ class Login extends React.Component{
   render(){
     console.log(this.props.error)
     return(
-      <>
+      <div>
         {this.props.error && <Message error header={this.props.error} />}
-        <Form onSubmit={this.handleSubmit}>
-          {this.renderUserStartPage()}
-          <label>UserName</label>
-          <Form.Input name='username' type='text' value={this.state.username} onChange={this.onChange} width={2} />
-          <label>Password</label>
-          <Form.Input name="password" type="password" value={this.state.password} onChange={this.onChange} width={2}/>
-          <Button type='submit'>Submit</Button>
-        </Form>
-      </>
+        <div className="ui one column stackable center aligned page grid">
+          <Form onSubmit={this.handleSubmit}>
+            {this.renderUserStartPage()}
+            <label>UserName</label>
+            <Form.Input name='username' type='text' value={this.state.username} onChange={this.onChange} width={15} />
+            <label>Password</label>
+            <Form.Input name="password" type="password" value={this.state.password} onChange={this.onChange} width={15}/>
+            <Button type='submit'>Submit</Button>
+          </Form>
+        </div>
+      </div>
     )
   }
 }

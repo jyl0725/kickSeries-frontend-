@@ -4,7 +4,7 @@ import {Tools, SketchField} from 'react-sketch';
 import {CirclePicker} from 'react-color'
 import ProjectAdapter from '../adapters/projectAdapter'
 import directTo from '../hocs/directTo'
-import { Dropdown, Menu, Button } from 'semantic-ui-react'
+import { Dropdown, Menu, Button, Popup, Input } from 'semantic-ui-react'
 
 
 class EditProject extends React.Component{
@@ -73,23 +73,26 @@ class EditProject extends React.Component{
   renderArtistOrDesignerCanvas = () => {
 
     const artistOptions =
-    [{ key: 1, text: 'Pencil',  value: Tools.Pencil },
-    { key: 2, text: 'Line',  value: Tools.Line },
-    { key: 3, text: 'Rectangle', value: Tools.Rectangle },
-    { key: 4, text: 'Circle',  value: Tools.Circle },
-    { key: 5, text: 'Pan',  value: Tools.Pan }]
+    [{ key: 1, text: 'pencil',  value: Tools.Pencil },
+    { key: 2, text: 'line',  value: Tools.Line },
+    { key: 3, text: 'rectangle', value: Tools.Rectangle },
+    { key: 4, text: 'circle',  value: Tools.Circle },
+    { key: 5, text: 'pan',  value: Tools.Pan }]
 
     if(this.props.currentUser.role === 'story teller'){
-      return <h1 className='canvas-page'>Stories are forever </h1>
+      return <h1 className="ui one column stackable center aligned page grid">Stories are forever </h1>
     }else if(this.props.currentUser.role === 'artist'){
-      return <div className='canvas-page'>
-        <h1>{this.props.project.title}</h1>
-        <h3>{this.props.project.story}</h3>
-        <Button inverted onClick={this.handleStartEdit}> Edit Project</Button>
-        {this.state.canUndo && <Button inverted onClick={this.undo}> Undo</Button>}
-        <Menu compact>
-          <Dropdown text='Dropdown' options={artistOptions} simple item onChange={this.handleSelect} />
-        </Menu>
+      return <div className="ui one column stackable center aligned page grid">
+        <div className='art-work-page'>
+            <h1>{this.props.project.title}</h1>
+             <h3>{this.props.project.story}</h3>
+          <Button inverted onClick={this.handleStartEdit}> Edit Project</Button>
+          {this.state.canUndo && <Button inverted onClick={this.undo}> Undo</Button>}
+          <Menu compact>
+            <Dropdown text={this.state.tool} options={artistOptions} simple item onChange={this.handleSelect} />
+          </Menu>
+        </div>
+
         <SketchField id='canvas'
                      ref={(c) => this._sketch = c}
                      width='700px'
@@ -100,15 +103,19 @@ class EditProject extends React.Component{
                      lineWidth={3} />
       </div>
     }else{
-      return <div className='canvas-page'>
-        <h1>{this.props.project.title}</h1>
-        <h3>{this.props.project.story}</h3>
+      return <div className="ui one column stackable center aligned page grid">
+            <div className='art-work-page'>
+          <h1>{this.props.project.title}</h1>
+           <h3>{this.props.project.story}</h3>
         <h3> Pick a color to start</h3>
         <CirclePicker color={this.state.color} onChangeComplete={this.handleColorChange} />
-        <Button onClick={this.handleStartEdit}> Edit Project</Button>
+        <div className='tools'>
+      <Button onClick={this.handleStartEdit}> Edit Project</Button>
         {this.state.canUndo && <Button onClick={this.undo}> Undo</Button>}
-        <label> Edit Line Width </label>
-        <input type='number' value={this.state.lineWidth} onChange={this.handleLineChange}/>
+        <Popup trigger ={<Input size='small' type='number' value={this.state.lineWidth} onChange={this.handleLineChange}/>}
+          content={"Edit Pencil Width"} width={3} />
+          </div>
+          </div>
         <SketchField id='canvas'
                      ref={(c) => this._sketch = c}
                      width='700px'

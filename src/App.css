@@ -53,15 +53,6 @@ h3{
   transition: opacity 300ms ease-in;
 }
 
-.fade-leave {
-  opacity: 1;
-}
-
-.fade-leave.fade-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-}
-
 .cards{
   display: flex;
   justify-content: center;
@@ -76,4 +67,17 @@ h3{
   display: flex;
   justify-content: center;
   position: relative;
+}
+
+.canvas-container{
+  display: flex;
+}
+
+.art-work-page{
+  padding-left: 100px !important;
+  margin-bottom: 10px;
+}
+
+.tools{
+  margin-top: 10px;
 }
