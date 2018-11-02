@@ -23,6 +23,7 @@ A Demo of this project can be found at :
 
 * HTML5 Canvas for user to design their drawing based on their role.
 * ActionCable(Web Socket) to broadcast drawing/color results on user project page.
+* React Router to navigate between different routes in this SPA.
 
 
 
