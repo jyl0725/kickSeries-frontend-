@@ -14,15 +14,15 @@ A Demo of this project can be found at :
 
 ## Built with
 
-<b>Built With </b>
 * React
 * Redux
+* React-Sketch
 
 
 ## Features
 
-HTML5 Canvas for user to design their drawing based on their role.
-ActionCable(Web Socket) to broadcast drawing/color results on user project page.
+* HTML5 Canvas for user to design their drawing based on their role.
+* ActionCable(Web Socket) to broadcast drawing/color results on user project page.
 
 
 
@@ -32,7 +32,7 @@ NPM Start
 Install and run [Kick Series Backend](https://github.com/jyl0725/kickSeries-backend)
 
 
-##How to use
+## How to use
 Sign up as an Story Teller, Artist, or Designer
 
 A story teller writes a title and story line for an artist to draw.
@@ -40,3 +40,6 @@ A story teller writes a title and story line for an artist to draw.
 An artist draws the outline of the sneaker.
 
 An Designer colors the blueprint that an artist drew.
+
+How a completed project will look like:
+![Home page](https://github.com/jyl0725/kickSeries-frontend-/blob/master/src/assets/completed.png)
