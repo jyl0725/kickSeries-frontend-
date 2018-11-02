@@ -1,7 +1,7 @@
 ## Kick Series
 A project management application for sneaker design.
 The live site is here: [Kick Series](https://kickseries-app.herokuapp.com)
-[Home page](https://github.com/jyl0725/kickSeries-frontend-/blob/master/src/assets/home.png)
+![Home page](https://github.com/jyl0725/kickSeries-frontend-/blob/master/src/assets/home.png)
 
 ## Motivation
 This project was created for a fluid workflow, with my own blend of passion for sneaker design, in any design work!
