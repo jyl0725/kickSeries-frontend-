@@ -1,9 +1,9 @@
-const api = 'https://kickseries-app-api.herokuapp.com/users/'
+const api = 'https://kickseries-app-api.herokuapp.com/users'
 
 class UserAdapater{
 
   static fetchPostUser(currentName, currentUserName, currentPassword, currentRole){
-  return fetch(api, {
+  return fetch('https://kickseries-app-api.herokuapp.com/users', {
     method: "POST",
     headers:{
       'Accept': 'application/json',
