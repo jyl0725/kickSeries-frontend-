@@ -16,7 +16,7 @@ const store = createStore(reducer, applyMiddleware(thunk))
 
 
 
-ReactDOM.render(<ActionCableProvider url='ws://localhost:4000/cable'><Provider store={store}><App /></Provider></ActionCableProvider>, document.getElementById('root'));
+ReactDOM.render(<ActionCableProvider url='ws://https://kickseries-app-api.herokuapp.com/projects/cable'><Provider store={store}><App /></Provider></ActionCableProvider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
