@@ -17,30 +17,38 @@ A Demo of this project can be found at :
 * React
 * Redux
 * React-Sketch
+* React-Color
+* React-Router
 
 
 ## Features
 
-* HTML5 Canvas for user to design their drawing based on their role.
-* ActionCable(Web Socket) to broadcast drawing/color results on user project page.
-* React Router to navigate between different routes in this SPA.
+* Provided different canvas tools based on user role type for their design needs
 
+* Incorporated web socket(action cable) for real-time update on user project for all participants
+
+* Integrated React Router to navigate between different routes in this SPA.
+
+* Utilized frontend and backend authentication for user login/sign up(for design page for individual user role)
+
+![WebSocket](https://github.com/jyl0725/kickSeries-frontend-/blob/master/src/assets/splitScreen.png)
+![Designer](https://github.com/jyl0725/kickSeries-frontend-/blob/master/src/assets/designer.png)
 
 
 ## Installation
-NPM Install
-NPM Start
-Install and run [Kick Series Backend](https://github.com/jyl0725/kickSeries-backend)
+1. `NPM Install`
+2. `NPM Start`
+3. Install and run [Kick Series Backend](https://github.com/jyl0725/kickSeries-backend)
 
 
 ## How to use
-Sign up as an Story Teller, Artist, or Designer
+1. Sign up as an Story Teller, Artist, or Designer
 
-A story teller writes a title and story line for an artist to draw.
+2. A story teller writes a title and story line for an artist to draw.
 
-An artist draws the outline of the sneaker.
+3. An artist draws the outline of the sneaker.
 
-An Designer colors the blueprint that an artist drew.
+4. An Designer colors the blueprint that an artist drew.
 
 How a completed project will look like:
-![Home page](https://github.com/jyl0725/kickSeries-frontend-/blob/master/src/assets/completed.png)
+![Completed](https://github.com/jyl0725/kickSeries-frontend-/blob/master/src/assets/completed.png)
