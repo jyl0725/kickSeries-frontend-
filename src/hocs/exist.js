@@ -9,7 +9,7 @@ const exist = (WrappedComponent) =>{
 
     componentDidMount(){
       if(localStorage.getItem('jwt')){
-        fetch('http://localhost:4000/profile',{
+        fetch('https://kickseries-app-api.herokuapp.com/profile',{
         headers: {
           Authorization: `Bearer ${localStorage.getItem('jwt')}`,
         },

@@ -27,7 +27,7 @@ class UncompletedProjectsContainer extends React.Component{
     }else{
       this.setState({redirectDesigner: true})
     }
-    fetch(`http://localhost:4000/project_users`,{
+    fetch(`https://kickseries-app-api.herokuapp.com/project_users`,{
        headers:{
        'Accept': 'application/json',
        'Content-Type': 'application/json'
